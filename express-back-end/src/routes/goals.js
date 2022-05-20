@@ -27,7 +27,8 @@ module.exports = db => {
     SET goal_name = '${req.body.goals.goal_name}', 
     end_date = '${req.body.goals.date}', 
     amount = ${req.body.goals.totalGoal} 
-    WHERE user_id = ${req.body.goals.user_id};
+    WHERE user_id = ${req.body.goals.user_id}
+		AND goals.amount > 0;;
     `
 		)
 			.then(data => {
