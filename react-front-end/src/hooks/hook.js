@@ -14,7 +14,7 @@ export default function useApplicationData() {
     dataPoints: [],
     alvinVacationSpent: []
   });
-  
+  console.log('state.goals!!', state.goals)
   const loginUser = (user) => {
     return axios
       .get(`http://localhost:8081/api/dataPoints`)
@@ -25,25 +25,26 @@ export default function useApplicationData() {
       })
     };
 
-  const updateGoals = (id, goals) => {
-    const newGoal = state.goals.map(item =>
-      item.user_id === id
-        ? (item = {
-          ...item,
-          goal_name: goals.goal_name,
-          totalGoal: goals.totalGoals,
-          date: goals.date
-        })
-        : item
-    );
-
+  const updateGoals = goals => {
+    console.log('goals!!', goals)
+    const newGoal = [
+      {
+        user_id: goals.user_id,
+        goal_name: goals.goal_name,
+        amount: goals.amount,
+        start_date: goals.start_date,
+        end_date: goals.end_date,
+      },
+      // ...state.goals,
+    ];
+    console.log('newGoal!!~', newGoal);
     return axios
       .put(`http://localhost:8081/api/goals`, {
         goals
       })
       .then(res => {
         setState(prev => {
-          return { ...prev, goal: newGoal };
+          return { ...prev, goals: newGoal };
         });
       });
   };

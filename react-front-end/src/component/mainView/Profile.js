@@ -25,14 +25,15 @@ export default function Profile(props) {
   const [state, setState] = useState({
     user_id: props.userId,
     goal_name: goalByID[0].goal_name,
-    totalGoal,
-    date: goalByID[0].end_date
-  })
+    start_date: goalByID[0].start_date,
+    end_date: goalByID[0].end_date,
+    amount: goalByID[0].amount,
+  });
 
-  const onChange = function () {
-    updateGoals(props.userId, state)
+  const onChange = () => {
+    updateGoals(state)
     transition(GOAL)
-  }
+  };
 
   return (
     <section className="vw-100 m-0 row">
@@ -70,8 +71,10 @@ export default function Profile(props) {
                 <thead>
                   <tr>
                     <td className='d-flex justify-content-center w-100'>
-                      <div className="form-outline w-75">
+                      <div className="w-50">
+                        Goal Name:
                         <input
+                          placeholder='GOAL NAME'
                           type="text"
                           id="goalName"
                           className="form-control align-items-center fw-bolder text-center"
@@ -87,12 +90,14 @@ export default function Profile(props) {
                   <tr>
                     <td className='d-flex justify-content-center w-100'>
                       <div className='w-50'>
+                      Goal Amount:
                         <input
+                          placeholder='GOAL AMOUNT'
                           type="number"
                           id="goalAmount"
-                          className="form-control align-items-center"
-                          value={state.totalGoal}
-                          onChange={(event) => setState({ ...state, totalGoal: parseInt(event.target.value)})}
+                          className="form-control align-items-center fw-bolder text-center"
+                          value={state.amount}
+                          onChange={(event) => setState({ ...state, amount: parseInt(event.target.value)})}
                         />
                       </div>
                       <label className="form-label visually-hidden" htmlFor="goalAmount">
@@ -103,13 +108,32 @@ export default function Profile(props) {
                   <tr>
                     <td className='d-flex justify-content-center w-100'>
                       <div className="w-50 col-lg-3 justify-content-center col-sm-6">
-                        <label htmlFor="date" className='visually-hidden'>date</label>
+                        Start Date:
+                        <label htmlFor="date" className='visually-hidden'>startDate</label>
                         <input
+                          placeholder='START DATE'
                           id="date"
-                          className="form-control"
+                          className="form-control align-items-center fw-bolder text-center"
                           type="date"
-                          value={state.date}
-                          onChange={(event) => setState({ ...state, date: event.target.value })}
+                          value={state.start_date}
+                          onChange={(event) => setState({ ...state, start_date: event.target.value })}
+                        />
+                        <span id="dateSelected"></span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className='d-flex justify-content-center w-100'>
+                      <div className="w-50 col-lg-3 justify-content-center col-sm-6">
+                        End Date:
+                        <label htmlFor="date" className='visually-hidden'>endDate</label>
+                        <input
+                          placeholder='END DATE'
+                          id="date"
+                          className="form-control align-items-center fw-bolder text-center"
+                          type="date"
+                          value={state.end_date}
+                          onChange={(event) => setState({ ...state, end_date: event.target.value })}
                         />
                         <span id="dateSelected"></span>
                       </div>
@@ -147,6 +171,17 @@ export default function Profile(props) {
                     <td>
                       <h3>
                         Aiming for: ${(totalGoal / 100).toFixed(2)}
+                      </h3>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h3>
+                        Current start date:
+                        <br />
+                        <span className='fw-bold'>
+                          {goalByID[0].start_date}
+                        </span>
                       </h3>
                     </td>
                   </tr>
