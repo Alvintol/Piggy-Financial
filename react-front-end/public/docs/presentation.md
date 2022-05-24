@@ -8,18 +8,17 @@ RICKY: ```'Hi, I'm Ricky, I'm a Full Stack Developer coming from a Commercial Re
 
 ALVIN: ``` 'Hi, I'm Alvin, also a Full Stack Developer but with a Human Resources background.```
 
-: ```'We are the Piggy Finance Team!'```
+- ```'We are the Piggy Finance Team!'```
 
 ## Inspiration for the project (30-45 sec): 
    ### The user story, pitch
 <br>
 
-:
+RICKY:
 - ```'We could all agree that tracking your financial goals can be tricky.'```
 - ```'We came up with this virtual piggy bank tracker for our users. '```
 - ```'It will assist by advising how much you should be putting away to keep you financially on track to get that new car, down payment on a new home or a much needed vacation, ESPECIALLY AFTER BOOTCAMP!.' ```
 - ```'It also has a built in feature as a budget tracker for when you are on said vacation!'```
-- ```'We'll now have Ricky kick off with our user login'```
 
 ## Walk-through of the main features (120-150 sec): tech stack, challenges
 - ```'We're using React for our front end, Express in the backend and Postgres for data management.'```
@@ -33,7 +32,7 @@ RICKY:
 \
 (SAVINGS PAGE )
 
-```As I log in, it will showcase the savings page with my goal, amount, and the days until I reached the goal. There’s also a progress circle on the right to remind myself what percent I’m at for my down payment. Underneath I can click the tabs to show how much money I’m advised to save per day, per week, per month, in order to reach my goal.```
+```As I log in, it will showcase the profile page with my goal, amount, and the days until I reached the goal. There’s also a progress circle on the right to remind myself what percent I’m at for my down payment. Underneath I can click the tabs to show how much money I’m advised to save per day, per week, per month, in order to reach my goal.```
 
 (PROFILE PAGE)
 
@@ -52,8 +51,6 @@ KEVIN:
 - ```Then $300 to the savings to hit my goal```
 - ```Now let's check to see how well I have been saving in the chart```
 - ```As you can see I'm doing pretty well!```
-- ```But we added the wrong information```
-- ```Lets go back and fix that so the the graph display it properly```
 - ```Once we hit our goal the piggy bank is full!```
 - ```Now we can click it to break it!```
 - ```WOOHOO!```
@@ -62,11 +59,10 @@ KEVIN:
 ALVIN:
 
 - ```In my page you can see I was initially saving for a car```
-- ```We'll check to see how on track we are to that new car```
+- ```But, lets say my mind has been changed post boot camp, and I now need a vacation instead```
 - ```We only need about $700.```
 - ```We just won a bet against Kevin and lets throw that money into our savings to hit our goal!```
-- ```But before that, lets say my mind has been changed post boot camp, and I now need a vacation instead```
-- ```Now lets go break that piggy to see that vacation mode is accessible```
+- ```Now lets go break that piggy we also that vacation mode is accessible only if you are saving for a vacation```
 (break the pig)
 (click vacation mode)
 - ```Once the dates are set, we see that the app changes to vacation mode on submission```
@@ -84,3 +80,7 @@ the biggest challenge our team had was making sure all of our apis and front end
 
 
 ## Further developments (30-60 sec): in the future, we'd like to explore x and y, etc.
+- set up proper authentication with our login & cookies
+- bar graph that displays where all your money is going
+- saving data to our expense table in other currencies
+- geo locating for currency suggestions over seas
