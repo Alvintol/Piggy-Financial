@@ -43,7 +43,7 @@ export default function Profile(props) {
   }
 
   const photo = getAvatarByID(props.userId)
-  
+
   return (
     <section id='profile' className="vw-100 m-0 row">
       <div className="container p-card">
@@ -87,6 +87,9 @@ export default function Profile(props) {
                   <tr>
                     <td className='d-flex justify-content-center w-100'>
                       <div className="form-outline w-75">
+                        <label className="form-label" htmlFor="goalName">
+                          Title
+                        </label>
                         <input
                           type="text"
                           id="goalName"
@@ -94,15 +97,15 @@ export default function Profile(props) {
                           value={state.goal_name}
                           onChange={(event) => setState({ ...state, goal_name: event.target.value })}
                         />
-                        <label className="form-label visually-hidden" htmlFor="goalName">
-                          Goal Name
-                        </label>
                       </div>
                     </td>
                   </tr>
                   <tr>
                     <td className='d-flex justify-content-center w-100'>
                       <div className='w-50'>
+                        <label className="form-label visually-hidden" htmlFor="goalAmount">
+                          Amount
+                        </label>
                         <input
                           type="number"
                           imputmode="decimal"
@@ -119,9 +122,6 @@ export default function Profile(props) {
                           }
                         />
                       </div>
-                      <label className="form-label visually-hidden" htmlFor="goalAmount">
-                        goalAmount
-                      </label>
                     </td>
                   </tr>
                   <tr>
@@ -163,6 +163,9 @@ export default function Profile(props) {
                   <tr>
                     <td className='d-flex justify-content-center w-100'>
                       <div className="w-50">
+                        <label className="form-label" htmlFor="goalName">
+                          Title
+                        </label>
                         <input
                           type="text"
                           id="goalName"
@@ -170,15 +173,15 @@ export default function Profile(props) {
                           value={state.goal_name}
                           onChange={(event) => setState({ ...state, goal_name: event.target.value })}
                         />
-                        <label className="form-label visually-hidden" htmlFor="goalName">
-                          Goal Name
-                        </label>
                       </div>
                     </td>
                   </tr>
                   <tr>
                     <td className='d-flex justify-content-center w-100'>
                       <div className='w-50'>
+                        <label className="form-label" htmlFor="goalAmount">
+                          Amount
+                        </label>
                         <input
                           type="number"
                           imputmode="decimal"
@@ -195,15 +198,12 @@ export default function Profile(props) {
                           }
                         />
                       </div>
-                      <label className="form-label visually-hidden" htmlFor="goalAmount">
-                        goalAmount
-                      </label>
                     </td>
                   </tr>
                   <tr>
                     <td className='d-flex justify-content-center w-100'>
                       <div className="w-50 col-lg-3 justify-content-center col-sm-6">
-                        <label htmlFor="date" className='visually-hidden'>date</label>
+                        <label htmlFor="date">End Date</label>
                         <input
                           id="date"
                           className="form-control"
