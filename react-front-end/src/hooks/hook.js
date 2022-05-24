@@ -5,7 +5,7 @@ import { getNewList , getUserByEmail } from '../helpers/helper_functions';
 
 export default function useApplicationData() {
   const [state, setState] = useState({
-    tab: 'SAVINGS',
+    tab: 'PROFILE',
     user: '',
     username: '',
     // email: '',

@@ -138,7 +138,7 @@ export default function Expenses(props) {
 							<div className="input-group w-25">
 								<input
 									type="number"
-									imputmode="decimal"
+									inputmode="decimal"
 									min="0.01"
 									step="0.01"
 									className="form-control"
