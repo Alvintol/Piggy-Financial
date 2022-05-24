@@ -260,7 +260,7 @@ export default function Savings(props) {
 							>VACATION MODE</button>
 						}
 						<div className={disappearText}>
-							<h1 id='piggy-break'>PIGGY BREAK!</h1>
+							<h1 id='piggy-break'>BREAK THE PIG</h1>
 						</div>
 						<button
 							className={piggyAppear}
