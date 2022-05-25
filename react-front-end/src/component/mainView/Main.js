@@ -10,6 +10,13 @@ import useVisualMode from '../../hooks/useVisualMode';
 
 const Main = props => {
 
+  //destructured props
+  const {
+    state,
+    changeTab, 
+
+  } = props;
+
   const PROFILE = 'PROFILE';
   const SAVINGS = 'SAVINGS';
   const EXPENSES = 'EXPENSES';
@@ -20,22 +27,14 @@ const Main = props => {
     <div>
       <TopNav
         key='topnav'
-        users={props.users}
-        userId={props.userId}
-        savings={props.savings}
+        users={state.users}
+        userId={state.user}
       />
       {props.state.tab === PROFILE && <Profile
         key='profile'
-        users={props.users}
-        goals={props.goals}
-        userId={props.userId}
-        incomes={props.incomes}
-        savings={props.savings}
+        state={state}
         removeGoal={props.removeGoal}
         updateGoals={props.updateGoals}
-        vacationMode={props.state.vacationMode}
-        exchangeRates={props.state.exchangeRates}
-        currentCurrency={props.state.currentCurrency}
       />}
       {props.state.tab === SAVINGS && <Savings
         key='savings'
@@ -74,8 +73,8 @@ const Main = props => {
       <BotNav
         key='botnav'
         transition={transition}
-        changeTab={props.changeTab}
-        vacationMode={props.state.vacationMode}
+        changeTab={changeTab}
+        vacationMode={state.vacationMode}
       />
     </div>
   );

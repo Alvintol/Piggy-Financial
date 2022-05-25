@@ -18,11 +18,11 @@ const Profile = props => {
   const REMOVE = 'REMOVE';
   const { mode, transition, back } = useVisualMode(GOAL);
 
-  const username = getUserByID(props.users, props.userId).username;
-  const savingsbyID = getSavingsByID(props.savings, props.userId);
-  const goalByID = getGoalByID(props.goals, props.userId);
+  const username = getUserByID(props.state.users, props.state.user).username;
+  const savingsbyID = getSavingsByID(props.state.savings, props.state.user);
+  const goalByID = getGoalByID(props.state.goals, props.state.user);
   const totalSaved = getTotalAmount(savingsbyID);
-  const photo = getAvatarByID(props.userId);
+  const photo = getAvatarByID(props.state.user);
 
   const [state, setState] = useState({
     goal_id: goalByID.id,
@@ -32,13 +32,13 @@ const Profile = props => {
     end_date: goalByID.end_date,
   });
 
-  // Edits user goal in database
+  // Edits state.user goal in database
   const onChange = newGoal => {
     props.updateGoals(goalByID.id, newGoal);
     transition(GOAL);
   };
 
-  // Deletes user goal from database
+  // Deletes state.user goal from database
   const removeGoal = (id) => {
     props.removeGoal(id)
     transition(EMPTY)
@@ -95,7 +95,9 @@ const Profile = props => {
                           id="goalName"
                           className="form-control align-items-center fw-bolder text-center"
                           value={state.goal_name}
-                          onChange={(event) => setState({ ...state, goal_name: event.target.value })}
+                          onChange={(event) => setState(prev => {
+                            return { ...prev, goal_name: event.target.value }
+                          })}
                         />
                       </div>
                     </td>
@@ -108,16 +110,18 @@ const Profile = props => {
                         </label>
                         <input
                           type="number"
-                          imputmode="decimal"
+                          inputMode="decimal"
                           min="0.01"
                           step="0.01"
                           id="goalAmount"
                           className="form-control align-items-center"
                           value={state.totalGoals}
                           onChange={event =>
-                            setState({
-                              ...state,
-                              totalGoals: event.target.value,
+                            setState(prev => {
+                              return {
+                                ...prev,
+                                totalGoals: event.target.value,
+                              }
                             })
                           }
                         />
@@ -133,7 +137,9 @@ const Profile = props => {
                           className="form-control"
                           type="date"
                           value={state.date}
-                          onChange={(event) => setState({ ...state, date: event.target.value })}
+                          onChange={(event) => setState(prev => {
+                            return { ...prev, date: event.target.value }
+                          })}
                         />
                         <span id="dateSelected"></span>
                       </div>
@@ -171,7 +177,9 @@ const Profile = props => {
                           id="goalName"
                           className="form-control align-items-center fw-bolder text-center"
                           value={state.goal_name}
-                          onChange={(event) => setState({ ...state, goal_name: event.target.value })}
+                          onChange={(event) => setState(prev => {
+                            return { ...prev, goal_name: event.target.value }
+                          })}
                         />
                       </div>
                     </td>
@@ -184,16 +192,18 @@ const Profile = props => {
                         </label>
                         <input
                           type="number"
-                          imputmode="decimal"
+                          inputMode="decimal"
                           min="0.01"
                           step="0.01"
                           id="goalAmount"
                           className="form-control align-items-center"
                           value={state.totalGoals}
                           onChange={event =>
-                            setState({
-                              ...state,
-                              totalGoals: event.target.value,
+                            setState(prev => {
+                              return {
+                                ...prev,
+                                totalGoals: event.target.value,
+                              }
                             })
                           }
                         />
@@ -209,7 +219,9 @@ const Profile = props => {
                           className="form-control"
                           type="date"
                           value={state.date}
-                          onChange={(event) => setState({ ...state, end_date: event.target.value })}
+                          onChange={(event) => setState(prev => {
+                            return { ...prev, end_date: event.target.value }
+                          })}
                         />
                         <span id="dateSelected"></span>
                       </div>
@@ -241,7 +253,7 @@ const Profile = props => {
                   <tr>
                     <td>
                       <h3>
-                        {props.vacationMode ?
+                        {props.state.vacationMode ?
                           <span>Location: </span> :
                           <span>Saving for: </span>}
                         <span className='fw-bold'>{goalByID.goal_name}</span>
@@ -251,17 +263,17 @@ const Profile = props => {
                   <tr>
                     <td>
                       <h3>
-                        {props.vacationMode ?
+                        {props.state.vacationMode ?
                           <span>Starting Budget: </span> :
                           <span>Aiming for: </span>}
-                        <span className='fw-bold'>{(Number(state.totalGoals) * props.exchangeRates.rates[props.currentCurrency]).toFixed(2)} {props.currentCurrency} </span>
+                        <span className='fw-bold'>{(Number(state.totalGoals) * props.state.exchangeRates.rates[props.state.currentCurrency]).toFixed(2)} {props.state.currentCurrency} </span>
                       </h3>
                     </td>
                   </tr>
                   <tr>
                     <td>
                       <h3>
-                        {props.vacationMode ?
+                        {props.state.vacationMode ?
                           <span>Home Time:</span> :
                           <span>Current Deadline:</span>}
                         <br />
@@ -304,9 +316,9 @@ const Profile = props => {
               <div className='mb-2'>
                 <button
                   className='m-1 btn btn-danger'
-                  onClick={() => {
+                  onClick={() =>
                     removeGoal(goalByID.id)
-                  }}
+                  }
                 >
                   Confirm
                 </button>
