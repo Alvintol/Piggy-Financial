@@ -25,7 +25,7 @@ export default function TopNav(props) {
           <div id="nav-title">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <h4 className='fw-bolder'>Piggy Finance</h4>
+                <h4 className='fw-bolder'>Piggy Financial</h4>
               </li>
             </ul>
           </div>
