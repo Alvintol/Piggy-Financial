@@ -10,8 +10,7 @@ import {
 } from '../../helpers/helper_functions';
 import NewGoal from './NewGoal';
 
-
-export default function Profile(props) {
+const Profile = props => {
   const EDIT = 'EDIT';
   const GOAL = 'GOAL';
   const EMPTY = 'EMPTY';
@@ -19,10 +18,11 @@ export default function Profile(props) {
   const REMOVE = 'REMOVE';
   const { mode, transition, back } = useVisualMode(GOAL);
 
-  const savingsbyID = getSavingsByID(props.savings, props.userId);
-  const totalSaved = getTotalAmount(savingsbyID);
-  const goalByID = getGoalByID(props.goals, props.userId);
   const username = getUserByID(props.users, props.userId).username;
+  const savingsbyID = getSavingsByID(props.savings, props.userId);
+  const goalByID = getGoalByID(props.goals, props.userId);
+  const totalSaved = getTotalAmount(savingsbyID);
+  const photo = getAvatarByID(props.userId);
 
   const [state, setState] = useState({
     goal_id: goalByID.id,
@@ -32,17 +32,17 @@ export default function Profile(props) {
     end_date: goalByID.end_date,
   });
 
+  // Edits user goal in database
   const onChange = newGoal => {
     props.updateGoals(goalByID.id, newGoal);
     transition(GOAL);
   };
 
+  // Deletes user goal from database
   const removeGoal = (id) => {
     props.removeGoal(id)
     transition(EMPTY)
-  }
-
-  const photo = getAvatarByID(props.userId)
+  };
 
   return (
     <section id='profile' className="vw-100 m-0 row">
@@ -322,4 +322,6 @@ export default function Profile(props) {
         </div>}
     </section>
   )
-}
+};
+
+export default Profile;
