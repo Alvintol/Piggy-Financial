@@ -39,9 +39,11 @@ const Expenses = props => {
 
 	const { mode, transition, back } = useVisualMode(EXPENSES);
 
+	//gets list of all currencies in api list
 	const currencies = getCurrenciesOptions(props.currencySymbols)
 	const expenseID = getFirstExpenseByID(props.expenses)
 
+	// Send input data to backend 
 	const submit = input => {
 		const expense = {
 			id: input.expense_id,
@@ -72,32 +74,32 @@ const Expenses = props => {
 			{mode === LINE && (
 				<LineGraph
 					key='savingGraph'
+					back={back}
 					user={props.userId}
 					goals={props.goals}
-					dataPoints={props.dataPoints}
 					expenses={props.expenses}
-					back={back}
+					dataPoints={props.dataPoints}
 					vacationMode={props.vacationMode}
 					vacationData={props.vacationData}
-					currencySymbols={props.currencySymbols}
-					currentCurrency={props.state.currentCurrency}
 					changeCurrency={props.changeCurrency}
+					currencySymbols={props.currencySymbols}
 					exchangeRates={props.state.exchangeRates}
+					currentCurrency={props.state.currentCurrency}
 				/>
 			)}
 			{mode === EXPENSES && (
 				<div id="user-expense-input">
 					<ExpenseTable
 						key='expenseTable'
-						expenses={props.expenses}
-						userId={props.userId}
-						removeExpense={props.removeExpense}
 						goals={props.goals}
+						userId={props.userId}
+						expenses={props.expenses}
 						vacationMode={props.vacationMode}
-						currencySymbols={props.currencySymbols}
-						currentCurrency={props.state.currentCurrency}
+						removeExpense={props.removeExpense}
 						changeCurrency={props.changeCurrency}
+						currencySymbols={props.currencySymbols}
 						exchangeRates={props.state.exchangeRates}
+						currentCurrency={props.state.currentCurrency}
 					/>
 					<div id='input-card' className={expenseInput}>
 						<form className={"d-flex justify-content-around row row-cols-lg-auto g-3 align-items-center p-3"}>
@@ -150,10 +152,7 @@ const Expenses = props => {
 									}
 									}
 								/>
-
-
 							</div>
-
 							<div className="col-12 expense-input-category">
 								<label
 									className="visually-hidden"
@@ -204,7 +203,6 @@ const Expenses = props => {
 										setState(prev => { return { ...prev, date: event.target.value } })
 									}}
 								/>
-
 								<span id="dateSelected"></span>
 							</div>
 							<div className="col-12 d-flex align-items-center">
@@ -223,8 +221,7 @@ const Expenses = props => {
 											category_name: state.category_name,
 											goal_name: state.goal_name,
 											goal_amount: state.goal_amount
-										}
-										);
+										});
 									}}
 								>
 									Submit
@@ -232,7 +229,9 @@ const Expenses = props => {
 								<button
 									onClick={(e) => {
 										e.preventDefault()
-										setState({ ...state, input: 'disappear' })
+										setState(prev => {
+											return { ...prev, input: 'disappear' }
+										});
 									}}
 									className='btn btn-danger m-1 cancel'>
 									Cancel
@@ -250,7 +249,9 @@ const Expenses = props => {
 									type="submit"
 									className={removeIncomeButton}
 									onClick={() => {
-										setState(prev => { return { ...prev, input: 'appear' } });
+										setState(prev => {
+											return { ...prev, input: 'appear' }
+										});
 									}}
 								>
 									Add New
@@ -260,7 +261,8 @@ const Expenses = props => {
 										name='graph-thumbnail'
 										className={removeMapview}>
 										<img
-											onClick={() => transition(LINE)}
+											onClick={() =>
+												transition(LINE)}
 											id='graph-thumbnail' src='../../../chart.png' alt='graph thumbnail' />
 									</button>
 								</div>
