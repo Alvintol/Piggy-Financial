@@ -87,7 +87,7 @@ const Savings = props => {
 		});
 	};
 
-	// Adds or removes a class based on state.input or state.vacation
+	// Adds or removes a className based on state.input or state.vacation
 	const disappearText = toggleDisappearText(state);
 	const vacationMode = toggleVacationMode(state);
 	const piggyAppear = togglePiggyAppear(state);
@@ -171,7 +171,7 @@ const Savings = props => {
 							</div>
 						</div>
 
-						<div class="w-100 d-flex col align-items-end justify-content-space-evenly">
+						<div className="w-100 d-flex col align-items-end justify-content-space-evenly">
 							<div
 								id="switch"
 								className="d-flex h-25 mb-3 align-items-center justify-content-center"

@@ -135,7 +135,7 @@ const Expenses = props => {
 							<div className="input-group w-25">
 								<input
 									type="number"
-									inputmode="decimal"
+									inputMode="decimal"
 									min="0.01"
 									step="0.01"
 									className="form-control"

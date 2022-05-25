@@ -16,21 +16,13 @@ const Vacation = props => {
     props.userId,
     vacationInfo.start_date
   )
-  const totalSpentOnVacation =
-    props.vacationMode ?
-      (getTotalAmount(vacationExpenses) *
-        props.exchangeRates.rates[props.currentCurrency]).toFixed(2)
-      : getTotalAmount(vacationExpenses);
 
-  const dayAllowance = (
-    ((vacationInfo.amount - totalSpentOnVacation) / 100 / homeTime) *
-    props.exchangeRates.rates[props.currentCurrency]
-  ).toFixed(2);
+  const totalSpentOnVacation = (getTotalAmount(vacationExpenses) * props.exchangeRates.rates[props.currentCurrency]).toFixed(2)
 
-  const weekAllowance = (
-    (((vacationInfo.amount - totalSpentOnVacation) * 7) / 100 / homeTime) *
-    props.exchangeRates.rates[props.currentCurrency]
-  ).toFixed(2);
+
+  const dayAllowance = ((vacationInfo.amount - totalSpentOnVacation) / 100 / homeTime).toFixed(2);
+
+  const weekAllowance = (((vacationInfo.amount - totalSpentOnVacation) * 7) / 100 / homeTime).toFixed(2);
 
   return (
     <div>
@@ -48,9 +40,7 @@ const Vacation = props => {
                 <td>
                   <h1>
                     {(
-                      (totalSpentOnVacation *
-                        props.exchangeRates.rates[props.currentCurrency]) /
-                      100
+                      totalSpentOnVacation / 100
                     ).toFixed(2)}{' '}
                     {props.currentCurrency}/{' '}
                     {(
@@ -77,7 +67,7 @@ const Vacation = props => {
           <ProgressCircle
             key="vacationCircle"
             total_saved={(totalSpentOnVacation / 100).toFixed(2)}
-            goalTotal_cents={(vacationInfo.amount / 100).toFixed(2)}
+            goalTotal_cents={((vacationInfo.amount * props.exchangeRates.rates[props.currentCurrency]) / 100).toFixed(2)}
             vacationMode={props.vacationMode}
           />
         </div>

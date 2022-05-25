@@ -5,10 +5,11 @@ import CircularProgressbar from "react-circular-progressbar";
 
 const ProgressCircle = props => {
 
+  console.log(props)
   // If Vacation mode is activated, reverse the display of the progress circle percentage
   const percentage =
     props.vacationMode ?
-      (100 - ((props.total_saved / props.goalTotal_cents) * 100)).toFixed(1) :
+    (100 - (props.total_saved / props.goalTotal_cents) * 100).toFixed(1) :
       ((props.total_saved / props.goalTotal_cents) * 100).toFixed(1);
 
   return (
