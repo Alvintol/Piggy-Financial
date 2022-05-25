@@ -8,7 +8,7 @@ RICKY: ```'Hi, I'm Ricky, I'm a Full Stack Developer coming from a Commercial Re
 
 ALVIN: ``` 'Hi, I'm Alvin, also a Full Stack Developer but with a Human Resources background.```
 
-- ```'We are the Piggy Finance Team!'```
+- ```'We are the Piggy Financial Team!'```
 
 ## Inspiration for the project (30-45 sec): 
    ### The user story, pitch
@@ -74,7 +74,7 @@ ALVIN:
 
 (make expense)
 
-- ```This is Piggy Finance```
+- ```This is Piggy Financial!```
 
 the biggest challenge our team had was making sure all of our apis and front end were communicating to properly display information dynamically
 
