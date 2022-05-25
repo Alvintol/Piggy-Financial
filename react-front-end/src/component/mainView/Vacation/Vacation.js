@@ -10,18 +10,17 @@ import {
 
 export default function Vacation(props) {
   const vacationInfo = getGoalByID(props.goals, props.userId)
+  const homeTime = getDaysTillGoal(vacationInfo)
   const vacationExpenses = filteredVacationExpenses(
     props.expenses,
     props.userId,
     vacationInfo.start_date,
   )
-  const totalSpentOnVacation = props.vacationMode
-    ? (
-        getTotalAmount(vacationExpenses) *
-        props.exchangeRates.rates[props.currentCurrency]
-      ).toFixed(2)
-    : getTotalAmount(vacationExpenses)
-  const homeTime = getDaysTillGoal(vacationInfo)
+  const totalSpentOnVacation =
+    props.vacationMode ?
+      (getTotalAmount(vacationExpenses) *
+        props.exchangeRates.rates[props.currentCurrency]).toFixed(2)
+      : getTotalAmount(vacationExpenses);
 
   const dayAllowance = (
     ((vacationInfo.amount - totalSpentOnVacation) / 100 / homeTime) *
@@ -32,6 +31,7 @@ export default function Vacation(props) {
     (((vacationInfo.amount - totalSpentOnVacation) * 7) / 100 / homeTime) *
     props.exchangeRates.rates[props.currentCurrency]
   ).toFixed(2)
+
   return (
     <div>
       <div className="d-flex align-items-center justify-content-center text-center goalbox">
@@ -78,6 +78,7 @@ export default function Vacation(props) {
             key="vacationCircle"
             total_saved={(totalSpentOnVacation / 100).toFixed(2)}
             goalTotal_cents={(vacationInfo.amount / 100).toFixed(2)}
+            vacationMode={props.vacationMode}
           />
         </div>
       </div>

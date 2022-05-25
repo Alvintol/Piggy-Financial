@@ -228,7 +228,7 @@ export default function useApplicationData() {
     const apiExpenses = 'http://localhost:8081/api/expenses';
     const apiDataPoints = 'http://localhost:8081/api/dataPoints';
     const apiCurrencySymbols = 'https://api.currencyfreaks.com/currency-symbols';
-    const apiExchangeRates = 'https://api.currencyfreaks.com/latest?apikey=bd341fe5384842489348b286b255c67a';
+    const apiExchangeRates = 'https://api.currencyfreaks.com/latest?apikey=5b3f999f6f8f46eb9ed500c44b821491';
 
     Promise.all([
       axios.get(apiGoals),
