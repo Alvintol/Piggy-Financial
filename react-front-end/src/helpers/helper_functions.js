@@ -59,13 +59,13 @@ export function getDaysTillGoal(state) {
 };
 
 export function getTotalAmount(state) {
-
   if (Array.isArray(state)) {
-
-    const amountList = state.map(expense => expense.amount);
+    const amountList = state.map(expense =>
+      expense.amount);
 
     return amountList.length > 1 ?
-      amountList.reduce((first, next) => first + next) :
+      amountList.reduce((first, next) =>
+        first + next) :
       amountList;
   } else {
     return state.amount;
@@ -128,8 +128,6 @@ export const getNewList = (list, itemID) => {
         item
     });
 }
-
-
 
 export const getCurrenciesOptions = currencyList => {
   const symbols = Object.keys(currencyList)
