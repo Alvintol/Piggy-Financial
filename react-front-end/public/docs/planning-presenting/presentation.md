@@ -47,10 +47,12 @@ KEVIN:
 - ```You can tell that I only need about 300 more dollars ```
 - ```The advice tabs will deactivate based on how much time is left until the goal end date```
 - ```Once I head over to the expenses page```
-- ```I'm going to add an income to my list```
-- ```Then $300 to the savings to hit my goal```
-- ```Now let's check to see how well I have been saving in the chart```
+- ```This is where I can enter all my expenses, income and savings amounts```
+- ```For now I'm going to send $300 of it to my savings to hit my goal```
+- ```Let's check to see how well I have been saving in the chart```
 - ```As you can see I'm doing pretty well!```
+- ```The graph currently shows the advised amount I should be saving in green ```
+- ```And if you hover over each mark```
 - ```Once we hit our goal the piggy bank is full!```
 - ```Now we can click it to break it!```
 - ```WOOHOO!```
