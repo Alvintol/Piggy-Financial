@@ -2,6 +2,11 @@
 
 Piggy Financial is an app that aims to help users track their financial goals. With a primary focus on vacation.
 
+The Piggy Team:
+[Alvin](https://github.com/Alvintol)
+[Kevin](https://github.com/Cloud9NB)
+[Ricky](https://github.com/Rickwu93)
+
 ![Login Page](https://github.com/Alvintol/Piggy-Financial/blob/master/react-front-end/public/readmephotos/Login.png?raw=true)
 ![Sign Up Page](https://github.com/Alvintol/Piggy-Financial/blob/master/react-front-end/public/readmephotos/SignUpPage.png?raw=true)
 ![Profile Page](https://github.com/Alvintol/Piggy-Financial/blob/master/react-front-end/public/readmephotos/ProfilePageKevin.png?raw=true)
