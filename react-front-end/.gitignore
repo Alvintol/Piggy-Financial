@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+public/docs/ideaPlanning.md
+public/docs/planningStage.md
+public/docs/presentation.md
+public/docs/UserStories.md
