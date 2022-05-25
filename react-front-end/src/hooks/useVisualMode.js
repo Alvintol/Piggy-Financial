@@ -8,14 +8,13 @@ export default function useVisualMode(initial) {
 
   // Function that changes views
   const transition = (mode, replace = false) => {
-    if (!replace) {
+    !replace ?
       setHistory(prev => {
-        return [...prev, mode]});
-    } else {
+        return [...prev, mode]
+      }) :
       setHistory(prev => {
         return [...prev.slice(0, -1), mode]
       });
-    };
   };
 
   // Function that allows return of the previous view

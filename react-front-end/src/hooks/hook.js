@@ -18,7 +18,6 @@ export default function useApplicationData() {
     currencySymbols: {},
     currentCurrency: 'USD',
     exchangeRates: {},
-    currenies: []
   });
 
   // const [ cookies, setCookie, removeCookie ] = useCookies(['email']);
@@ -137,9 +136,9 @@ export default function useApplicationData() {
   };
 
   const removeGoal = goalID => {
-    const newGoalList = state.goals.map((goal, i) => {
+    const newGoalList = state.goals.map((goal, index) => {
       return goal.id === goalID ?
-        state.goals.splice(i, 1) :
+        state.goals.splice(index, 1) :
         goal
     });
 
@@ -214,7 +213,6 @@ export default function useApplicationData() {
     const apiUsers = 'http://localhost:8081/api/users';
     const apiSavings = 'http://localhost:8081/api/savings';
     const apiExpenses = 'http://localhost:8081/api/expenses';
-    const apiCurrenies = 'https://api.currencyfreaks.com/supported-currencies';
     const apiDataPoints = 'http://localhost:8081/api/dataPoints';
     const apiCurrencySymbols = 'https://api.currencyfreaks.com/currency-symbols';
     const apiExchangeRates = 'https://api.currencyfreaks.com/latest?apikey=bd341fe5384842489348b286b255c67a';
@@ -224,7 +222,6 @@ export default function useApplicationData() {
       axios.get(apiUsers),
       axios.get(apiSavings),
       axios.get(apiExpenses),
-      axios.get(apiCurrenies),
       axios.get(apiDataPoints),
       axios.get(apiCurrencySymbols),
       axios.get(apiExchangeRates),
@@ -236,10 +233,9 @@ export default function useApplicationData() {
           users: all[1].data,
           savings: all[2].data,
           expenses: all[3].data,
-          currenies: all[4].data,
-          dataPoints: all[5].data,
-          currencySymbols: all[6].data,
-          exchangeRates: all[7].data,
+          dataPoints: all[4].data,
+          currencySymbols: all[5].data,
+          exchangeRates: all[6].data,
         }));
       })
       .catch(error => {
