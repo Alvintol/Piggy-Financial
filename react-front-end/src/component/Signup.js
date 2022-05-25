@@ -1,7 +1,8 @@
 import React from 'react';
 import "../sass/signup.scss";
 import { useState } from 'react';
-export default function Signup(props) {
+
+const Signup = props => {
 
   const [state, setState] = useState({
     username: '',
@@ -134,4 +135,6 @@ export default function Signup(props) {
       </div>
     </section>
   );
-}
+};
+
+export default Signup;

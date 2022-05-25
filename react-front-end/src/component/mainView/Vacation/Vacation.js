@@ -8,13 +8,13 @@ import {
   getGoalByID,
 } from '../../../helpers/helper_functions'
 
-export default function Vacation(props) {
+const Vacation = props => {
   const vacationInfo = getGoalByID(props.goals, props.userId)
   const homeTime = getDaysTillGoal(vacationInfo)
   const vacationExpenses = filteredVacationExpenses(
     props.expenses,
     props.userId,
-    vacationInfo.start_date,
+    vacationInfo.start_date
   )
   const totalSpentOnVacation =
     props.vacationMode ?
@@ -25,12 +25,12 @@ export default function Vacation(props) {
   const dayAllowance = (
     ((vacationInfo.amount - totalSpentOnVacation) / 100 / homeTime) *
     props.exchangeRates.rates[props.currentCurrency]
-  ).toFixed(2)
+  ).toFixed(2);
 
   const weekAllowance = (
     (((vacationInfo.amount - totalSpentOnVacation) * 7) / 100 / homeTime) *
     props.exchangeRates.rates[props.currentCurrency]
-  ).toFixed(2)
+  ).toFixed(2);
 
   return (
     <div>
@@ -84,4 +84,6 @@ export default function Vacation(props) {
       </div>
     </div>
   )
-}
+};
+
+export default Vacation;

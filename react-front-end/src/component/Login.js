@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import "../sass/login.scss";
 
-export default function Login(props) {
-
+const Login = props => {
   const [state, setState] = useState({
     id: '',
     email: '',
@@ -115,5 +114,6 @@ export default function Login(props) {
       </div>
     </section>
   );
-}
+};
 
+export default Login;
