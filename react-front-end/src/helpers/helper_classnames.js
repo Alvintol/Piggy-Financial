@@ -22,3 +22,25 @@ export const toggleRemoveMapview = state =>
     'disappear': state.input !== 'disappear',
     'btn card': state.input === 'disappear'
   });
+
+export const togglePiggyAppear = state =>
+  classNames('pig-image', {
+    'disappear': state.input === 'disappear' ||
+      state.vacation === 'ON'
+  });
+
+export const togglePiggyBreak = state =>
+  classNames('pig-break border border-4', {
+    'disappear': state.input !== 'disappear' ||
+      state.vacation === 'ON'
+  });
+
+export const toggleVacationMode = state =>
+  classNames('button-vac', {
+    'disappear': state.vacation === 'ON'
+  })
+
+export const toggleDisappearText = state =>
+  classNames('break-title', {
+    'disappear': state.vacation === 'ON'
+  })

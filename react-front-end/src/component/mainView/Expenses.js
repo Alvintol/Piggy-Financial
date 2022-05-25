@@ -29,7 +29,7 @@ const Expenses = props => {
 		exchangeRate: props.exchangeRates.rates[props.currentCurrency]
 	});
 
-	// Add or removes a class based on state.input
+	// Adds or removes a class based on state.input
 	const removeIncomeButton = toggleRemoveIncomeButton(state)
 	const expenseInput = toggleClassNameExpenseInput(state);
 	const removeMapview = toggleRemoveMapview(state)
