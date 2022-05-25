@@ -1,8 +1,10 @@
 import React from 'react';
 
-export function getTotalExpensesForUser(state, user) {
-  const filteredExpenses = state.expenses.filter((expenses) => expenses.username === user);
-  const totalExpense = filteredExpenses.reduce((previous, current) => previous + current.amount, 0);
+export const getTotalExpensesForUser = (state, user) => {
+  const filteredExpenses = state.expenses.filter((expenses) =>
+    expenses.username === user);
+  const totalExpense = filteredExpenses.reduce((previous, current) =>
+    previous + current.amount, 0);
   return '$' + (totalExpense / 100).toFixed(2);
 };
 
@@ -10,6 +12,10 @@ export const getUserByID = (users, id) =>
   users.find(user =>
     user.id === id
   );
+
+export const getUserByEmail = (email, state) =>
+  state.find(user =>
+    user.email === email);
 
 export const getSavingsByID = (expenses, id) =>
   expenses.filter(expense =>
@@ -98,10 +104,11 @@ export const getVacationExpenses = (stateExpense, userId) => {
 export const filteredVacationExpenses = (expenses, id, date) =>
   expenses.filter(expense =>
     expense &&
+    expense.user_id === id &&
     expense.category_id !== 5 &&
     expense.category_id !== 8 &&
-    expense.user_id === id &&
-    expense.created_at >= date);
+    expense.created_at >= date
+  );
 
 export const getVacationData = (data, date) =>
   data.filter(item =>
@@ -122,17 +129,16 @@ export const getNewList = (list, itemID) => {
     });
 }
 
-export const getUserByEmail = (email, state) => state.find(user => user.email === email);
+
 
 export const getCurrenciesOptions = currencyList => {
   const symbols = Object.keys(currencyList)
-  return symbols.map((currency, ii) => {
-    return <option key={ii} value={symbols[ii]}>{currencyList[currency]}</option>
-  }
+  return symbols.map((currency, ii) =>
+    <option key={ii} value={symbols[ii]}>{currencyList[currency]}</option>
   )
 };
 
-export const getAvatarByID = (id) => {
+export const getAvatarByID = id => {
   switch (id) {
     case 1: return 'https://i.ibb.co/nc44FGT/facetache1-removebg-preview.png';
     case 2: return "https://i.ibb.co/T2KhqWV/facetache2-removebg-preview.png";

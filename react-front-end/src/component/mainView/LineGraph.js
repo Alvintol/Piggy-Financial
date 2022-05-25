@@ -144,7 +144,6 @@ export default function LineGraph(props) {
               },
               y: {
                 ticks: {
-                  // Include a dollar sign in the ticks
                   callback: function (value, index, ticks) {
                     return parseInt(value * (state.exchangeRate || 1)) + ` ${state.currency}`;
                   }

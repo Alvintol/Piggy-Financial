@@ -91,9 +91,7 @@ export default function Savings(props) {
 	const disappearText = classNames('break-title', {
 		'disappear': state.vacation === 'ON'
 	})
-	//  if the DAYS until END DATE is less than a WEEK then DO NOT RENDER
-	//  if the DAYS until END DATE is less than a MONTH then DO NOT RENDER
-	//  if the DAYS until END DATE is less than a YEAR then DO NOT RENDER
+
 	// gets money per day/week/month/year
 	const moneyTillGoal = totalGoal - totalSaved;
 	const moneyPerDayToGoal =
