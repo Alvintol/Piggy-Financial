@@ -1,7 +1,7 @@
 import React from "react";
 import '../../sass/profile.scss';
 
-export default function NewGoal(props) {
+const NewGoal = props => {
 	return (
 		<div className="chart-align">
           <div className='goal-container'>
@@ -39,4 +39,6 @@ export default function NewGoal(props) {
           </div>
         </div>
 	)
-}
+};
+
+export default NewGoal;
