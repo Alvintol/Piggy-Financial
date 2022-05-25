@@ -2,12 +2,15 @@
 
 Piggy Financial is an app that aims to help users track their financial goals. With a primary focus on vacation.
 
-!['']()
-!['']()
-!['']()
-!['']()
-!['']()
-
+![Login Page](https://github.com/Alvintol/Piggy-Financial/blob/master/react-front-end/public/readmephotos/Login.png?raw=true)
+![Sign Up Page](https://github.com/Alvintol/Piggy-Financial/blob/master/react-front-end/public/readmephotos/SignUpPage.png?raw=true)
+![Profile Page](https://github.com/Alvintol/Piggy-Financial/blob/master/react-front-end/public/readmephotos/ProfilePageKevin.png?raw=true)
+![Savings Page](https://github.com/Alvintol/Piggy-Financial/blob/master/react-front-end/public/readmephotos/SavingsPage.png?raw=true)
+![Expense Page](https://github.com/Alvintol/Piggy-Financial/blob/master/react-front-end/public/readmephotos/ExpensePage.png?raw=true)
+![Savings Line Graph](https://github.com/Alvintol/Piggy-Financial/blob/master/react-front-end/public/readmephotos/LineGraphSaving.png?raw=true)
+![Spending Line Graph](https://github.com/Alvintol/Piggy-Financial/blob/master/react-front-end/public/readmephotos/LineGrapghSpending.png?raw=true)
+![Break The Piggy Bank](https://github.com/Alvintol/Piggy-Financial/blob/master/react-front-end/public/readmephotos/SavingsPigBreak.png?raw=true)
+![Budget Page](https://github.com/Alvintol/Piggy-Financial/blob/master/react-front-end/public/readmephotos/BudgetPage.png?raw=true)
 
 ## Running the project
 
