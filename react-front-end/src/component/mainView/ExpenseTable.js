@@ -8,9 +8,9 @@ import {
   getGoalByID
 } from '../../helpers/helper_functions';
 
-export default function ExpenseTable(props) {
+const ExpenseTable = props => {
 
-  const vacation = getGoalByID(props.goals, props.userId)
+  const vacation = getGoalByID(props.goals, props.userId);
 
   const filteredExpensesById =
     props.vacationMode ?
@@ -20,12 +20,12 @@ export default function ExpenseTable(props) {
   const expenses = filteredExpensesById.map(expense => {
     const categoryName = getCategoryName(expense.category_id);
 
-    const classname = (prop) => {
+    const classname = prop => {
       switch (prop) {
         case 'Income': return 'Income';
         case 'Savings': return 'Savings';
         default: return 'Expense';
-      }
+      };
     };
 
     return (
@@ -52,9 +52,13 @@ export default function ExpenseTable(props) {
           <td>Amount</td>
         </tr>
       </thead>
-      <tbody id='expense-table' className='list-group infinite-scroll fw-bold'>
+      <tbody
+        id='expense-table'
+        className='list-group infinite-scroll fw-bold'>
         {expenses}
       </tbody>
     </table>
   );
 };
+
+export default ExpenseTable;
