@@ -14,9 +14,6 @@ Piggy Financial is an app that aims to help users track their financial goals. W
 
 ## Creating the DB
 
-Use the `psql -U vagrant` command to login to the PostgreSQL server with the username `vagrant` and the password `123`. This command `MUST` be run in a vagrant terminal, we are using the PostgreSQL installation provided in a vagrant environment.
-
-
 Copy the `.env.example` file to `.env` and fill in the necessary PostgreSQL configuration. The node-postgres library uses these environment variables by default.
 This should look like this below:
 
@@ -29,9 +26,16 @@ DB_PASS=123
 ```
 
 `cd` into `Piggy-Financial` folder. 
+Use the `psql -U vagrant` command to login to the PostgreSQL server with the username `vagrant` and the password `123`. This command `MUST` be run in a vagrant terminal, we are using the PostgreSQL installation provided in a vagrant environment.
+
 Create a database with the command `CREATE DATABASE piggy;`.\
-Run command `/i express-back-end/src/db/schema/create.sql` \
-Run command `\i express-back-end/src/db/seeds/allinone.sql` to populate the seed data to the tables.
+Run command to create the tables: 
+
+```\i express-back-end/src/db/schema/create.sql;```
+
+Run command to populate the seed data to the tables: 
+
+```\i express-back-end/src/db/seeds/allinone.sql;```
 
 ## Running the project
 
