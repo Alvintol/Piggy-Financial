@@ -198,9 +198,8 @@ const LineGraph = props => {
         </select>
         <button
           className='btn btn-primary m-2 gradient-custom-4 submit text-dark'
-          onClick={() => props.back()
-          }>
-          Back
+          onClick={() => props.transition('EXPENSES')}>
+          Expenses
         </button>
       </div>
     </div>

@@ -41,18 +41,19 @@ RICKY:
 KEVIN: 
 
 - ```As you see with my profile I'm trying to save up for a Macbook.```
-
 - ```We'll head over to the savings page just to see how much more I need to save.```
-
 - ```You can tell that I only need about 300 more dollars ```
 - ```The advice tabs will deactivate based on how much time is left until the goal end date```
-- ```Once I head over to the expenses page```
-- ```I'm going to add an income to my list```
-- ```Then $300 to the savings to hit my goal```
-- ```Now let's check to see how well I have been saving in the chart```
+- ```Once I head over to the expenses page you can see how well I've been saving in the chart```
 - ```As you can see I'm doing pretty well!```
+- ```The green line is the guide to follow to stay on track``` 
+- ```The gold is how much I've saved``` 
+- ```Clicking the expenses button is where I can enter all my expenses, income and savings amounts```
+- ```For now I'm going to send $300 to my savings to hit my goal```
+- ```And the graph will dynamically change accordingly ```
+- ```And if you hover over each mark```
 - ```Once we hit our goal the piggy bank is full!```
-- ```Now we can click it to break it!```
+- ```Now we can click it to break it open!!```
 - ```WOOHOO!```
 - ```I'll pass it off to Alvin to handle the rest of our features```
 
@@ -61,17 +62,18 @@ ALVIN:
 - ```In my page you can see I was initially saving for a car```
 - ```But, lets say I change my mind post boot camp, and I now need a vacation instead```
 - ```We look at our savings and see we only need about $700.```
-- ```We just won a bet against Kevin and lets throw that money into our savings to hit our goal!```
-- ```Now lets go break that piggy we also that vacation mode is accessible only if you are saving for a vacation```\
+- ```We just won a bet against Kevin recdently and lets throw that money into our savings to hit our goal!```
+- ```Now lets go break that piggy!```
+- ```We can now see that vacation mode is accessible since we were are saving for a vacation```\
 (break the pig)\
 (click vacation mode)
-- ```Once the dates are set, we see that the app changes to vacation mode on submission```
-- ```The savings page changes to track your budget and advised daily spending```
+- ```Once the dates are set, we see that the app changes transforms and```
+- ```The savings page tracks your budget and advised daily spending```
 - ```Expenses now only show expenses made after the vacation start date```
 - ```The line graph reverses and tracks your spending instead of your savings```
 - ```You can even change the currency that is being displayed to match the country your in``` 
 - ```expenses made in other currencies will also convert back to USD in the table```
-
+- ```That concludes our main features```
 (make expense)
 
 the biggest challenge we had was making sure all of our apis and front end were communicating to properly display information dynamically

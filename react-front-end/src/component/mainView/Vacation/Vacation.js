@@ -20,9 +20,9 @@ const Vacation = props => {
   const totalSpentOnVacation = (getTotalAmount(vacationExpenses) * props.exchangeRates.rates[props.currentCurrency]).toFixed(2)
 
 
-  const dayAllowance = ((vacationInfo.amount - totalSpentOnVacation) / 100 / homeTime).toFixed(2);
+  const dayAllowance = (((vacationInfo.amount * props.exchangeRates.rates[props.currentCurrency]) - totalSpentOnVacation) / 100 / homeTime).toFixed(2);
 
-  const weekAllowance = (((vacationInfo.amount - totalSpentOnVacation) * 7) / 100 / homeTime).toFixed(2);
+  const weekAllowance = ((((vacationInfo.amount * props.exchangeRates.rates[props.currentCurrency]) - totalSpentOnVacation) * 7) / 100 / homeTime).toFixed(2);
 
   return (
     <div>
