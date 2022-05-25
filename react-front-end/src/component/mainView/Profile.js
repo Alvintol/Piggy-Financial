@@ -46,7 +46,7 @@ export default function Profile(props) {
 
   return (
     <section id='profile' className="vw-100 m-0 row">
-      <div className="container p-card">
+      <div className="container p-card w-50">
         <div className="row d-flex justify-content-center h-100">
           <div className="w-50 col-md-12 col-xl-4 m-4">
             <div className="card">
@@ -155,7 +155,7 @@ export default function Profile(props) {
         </div>
       }
       {mode === EDIT &&
-        <div className="chart-align">
+        <div className="chart-align w-50">
           <div className='goal-container'>
             <div className='m-5 card d-flex align-items-center justify-content-center text-center flex-column'>
               <table className="table table-bordered">
@@ -233,7 +233,7 @@ export default function Profile(props) {
         </div>
       }
       {mode === GOAL &&
-        <div className="chart-align">
+        <div className="chart-align w-50">
           <div className='goal-container'>
             <div className='m-5 card d-flex align-items-center justify-content-center text-center flex-column'>
               <table className="table">
