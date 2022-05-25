@@ -37,7 +37,7 @@ const Expenses = props => {
 	const EXPENSES = 'EXPENSES';
 	const LINE = 'LINE';
 
-	const { mode, transition, back } = useVisualMode(EXPENSES);
+	const { mode, transition, back } = useVisualMode(LINE);
 
 	//gets list of all currencies in api list
 	const currencies = getCurrenciesOptions(props.currencySymbols)
@@ -79,6 +79,7 @@ const Expenses = props => {
 					goals={props.goals}
 					expenses={props.expenses}
 					dataPoints={props.dataPoints}
+					transition={transition}
 					vacationMode={props.vacationMode}
 					vacationData={props.vacationData}
 					changeCurrency={props.changeCurrency}
