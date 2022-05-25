@@ -1,12 +1,12 @@
 import React from 'react';
-import useVisualMode from '../hooks/useVisualMode';
-import useApplicationData from '../hooks/hook';
-import Main from './mainView/Main';
+import '../sass/app.scss';
 import Login from './Login';
 import Signup from './Signup';
-import '../sass/app.scss';
+import Main from './mainView/Main';
+import useApplicationData from '../hooks/hook';
+import useVisualMode from '../hooks/useVisualMode';
 
-export default function App() {
+const App = () => {
   const {
     state,
     addExpense,
@@ -19,7 +19,7 @@ export default function App() {
     signupUser
   } = useApplicationData();
 
-  //views
+  // Views
   const LOGIN = 'LOGIN';
   const SIGNUP = 'SIGNUP';
   const SHOW = 'SHOW';
@@ -35,39 +35,40 @@ export default function App() {
 
       {mode === LOGIN && <Login
         key='login'
-        transition={transition}
-        loginUser={loginUser}
         users={state.users}
+        loginUser={loginUser}
+        transition={transition}
       />}
 
       {mode === SIGNUP && <Signup
         key='signup'
-        transition={transition}
         back={back}
+        transition={transition}
         signupUser={signupUser}
       />}
 
       {mode === SHOW && <Main
         key='main'
+        back={back}
         state={state}
-        tab={state.tab}
+        userId={state.user}
+        users={state.users}
+        goals={state.goals}
         changeTab={changeTab}
         removeGoal={removeGoal}
         addExpense={addExpense}
-        userId={state.user}
-        users={state.users}
-        expenses={state.expenses}
         incomes={state.incomes}
         savings={state.savings}
-        dataPoints={state.dataPoints}
+        expenses={state.expenses}
         updateGoals={updateGoals}
-        goals={state.goals}
-        back={back}
-        alvinVacationSpent={state.alvinVacationSpent}
+        dataPoints={state.dataPoints}
         removeExpense={removeExpense}
-        vacationMode={state.vacationMode}
         changeCurrency={changeCurrency}
+        vacationMode={state.vacationMode}
+        alvinVacationSpent={state.alvinVacationSpent}
       />}
     </div>
   );
-}
+};
+
+export default App;

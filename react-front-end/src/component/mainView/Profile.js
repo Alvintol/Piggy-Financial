@@ -10,8 +10,7 @@ import {
 } from '../../helpers/helper_functions';
 import NewGoal from './NewGoal';
 
-
-export default function Profile(props) {
+const Profile = props => {
   const EDIT = 'EDIT';
   const GOAL = 'GOAL';
   const EMPTY = 'EMPTY';
@@ -19,10 +18,11 @@ export default function Profile(props) {
   const REMOVE = 'REMOVE';
   const { mode, transition, back } = useVisualMode(GOAL);
 
-  const savingsbyID = getSavingsByID(props.savings, props.userId);
-  const totalSaved = getTotalAmount(savingsbyID);
-  const goalByID = getGoalByID(props.goals, props.userId);
   const username = getUserByID(props.users, props.userId).username;
+  const savingsbyID = getSavingsByID(props.savings, props.userId);
+  const goalByID = getGoalByID(props.goals, props.userId);
+  const totalSaved = getTotalAmount(savingsbyID);
+  const photo = getAvatarByID(props.userId);
 
   const [state, setState] = useState({
     goal_id: goalByID.id,
@@ -32,21 +32,21 @@ export default function Profile(props) {
     end_date: goalByID.end_date,
   });
 
+  // Edits user goal in database
   const onChange = newGoal => {
     props.updateGoals(goalByID.id, newGoal);
     transition(GOAL);
   };
 
+  // Deletes user goal from database
   const removeGoal = (id) => {
     props.removeGoal(id)
     transition(EMPTY)
-  }
-
-  const photo = getAvatarByID(props.userId)
+  };
 
   return (
     <section id='profile' className="vw-100 m-0 row">
-      <div className="container p-card">
+      <div className="container p-card w-50">
         <div className="row d-flex justify-content-center h-100">
           <div className="w-50 col-md-12 col-xl-4 m-4">
             <div className="card">
@@ -155,7 +155,7 @@ export default function Profile(props) {
         </div>
       }
       {mode === EDIT &&
-        <div className="chart-align">
+        <div className="chart-align w-50">
           <div className='goal-container'>
             <div className='m-5 card d-flex align-items-center justify-content-center text-center flex-column'>
               <table className="table table-bordered">
@@ -233,7 +233,7 @@ export default function Profile(props) {
         </div>
       }
       {mode === GOAL &&
-        <div className="chart-align">
+        <div className="chart-align w-50">
           <div className='goal-container'>
             <div className='m-5 card d-flex align-items-center justify-content-center text-center flex-column'>
               <table className="table">
@@ -322,4 +322,6 @@ export default function Profile(props) {
         </div>}
     </section>
   )
-}
+};
+
+export default Profile;

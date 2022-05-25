@@ -1,27 +1,29 @@
 import { useState, useEffect } from 'react';
+import { getNewList, getUserByEmail } from '../helpers/helper_functions';
 // import { useCookies } from 'react-cookie';
 import axios from 'axios';
-import { getNewList , getUserByEmail } from '../helpers/helper_functions';
 
 export default function useApplicationData() {
   const [state, setState] = useState({
     tab: 'PROFILE',
-    user: '',
     username: '',
     // email: '',
+    user: '',
     users: [],
     goals: [],
     savings: [],
     expenses: [],
     dataPoints: [],
     vacationMode: false,
-    currencySymbols: {},
     currentCurrency: 'USD',
+    currencySymbols: {},
     exchangeRates: {},
   });
 
+  // started implementing cookies
   // const [ cookies, setCookie, removeCookie ] = useCookies(['email']);
 
+  // Adds a user to database
   const signupUser = (username, email, password) => {
     const users = [
       {
@@ -48,6 +50,12 @@ export default function useApplicationData() {
       });
   };
 
+  // Sets user ID to state based on who is logged in
+  const setUser = user => setState(prev => {
+    return { ...prev, user };
+  });
+
+  // Retrieves user's relevant data
   const loginUser = (email, password) => {
     // setCookie('email', email, { path: '/'});
     const users = {
@@ -60,25 +68,26 @@ export default function useApplicationData() {
       axios.get(`http://localhost:8081/api/dataPoints`),
       axios.post(`http://localhost:8081/api/login`, users),
     ])
-    .then(() => {
-      setState(prev => {
-        return { ...prev, user: user.id }
-      })
-    })
+      .then(() =>
+        setState(prev => {
+          return { ...prev, user: user.id }
+        })
+      )
   };
 
+  // Changes the main view of the app on bot nav click
   const changeTab = tab =>
     setState(prev => {
       return { ...prev, tab }
     })
 
+  // Changes current desired currency rate
   const changeCurrency = currency =>
     setState(prev => {
       return { ...prev, currentCurrency: currency }
     });
 
-
-
+  // Updates user edited goal
   const updateGoals = (goalID, goals) => {
 
     const updatedGoal = state.goals.map(item =>
@@ -93,6 +102,7 @@ export default function useApplicationData() {
         : item
     );
 
+    // If Vacation Mode is activated swap the savings views to budget
     goals.vacation === 'ON' ?
       setState(prev => {
         return { ...prev, tab: 'VACATION', goals: updatedGoal, vacationMode: true }
@@ -110,13 +120,11 @@ export default function useApplicationData() {
       })
   };
 
-
+  // Deletes an expense from database
   const removeExpense = expenseID => {
 
     const newExpenseList = getNewList(state.expenses, expenseID);
-
     const newSavingList = getNewList(state.savings, expenseID);
-
     const newDataPoints = getNewList(state.dataPoints, expenseID)
 
     return axios
@@ -135,12 +143,13 @@ export default function useApplicationData() {
       })
   };
 
+  // Deletes a goal from database
   const removeGoal = goalID => {
-    const newGoalList = state.goals.map((goal, index) => {
-      return goal.id === goalID ?
+    const newGoalList = state.goals.map((goal, index) =>
+      goal.id === goalID ?
         state.goals.splice(index, 1) :
         goal
-    });
+    );
 
     return axios
       .delete(`http://localhost:8081/api/delete`, {
@@ -156,8 +165,8 @@ export default function useApplicationData() {
       })
   };
 
+  // Adds an expense to database
   const addExpense = expense => {
-
     const expenses = [
       {
         id: expense.id,
@@ -192,10 +201,16 @@ export default function useApplicationData() {
       }
     ];
 
+    // Updates local state of changed data
     setState(prev => {
-      return { ...prev, expenses, savings, dataPoints, currentCurrency: expense.currentCurrency };
+      return {
+        ...prev,
+        expenses,
+        savings,
+        dataPoints,
+        currentCurrency: expense.currentCurrency
+      };
     });
-
 
     return axios
       .put(`http://localhost:8081/api/expenses`, {
@@ -206,8 +221,6 @@ export default function useApplicationData() {
       });
   };
 
-  const setUser = user => setState({ ...state, user });
-
   useEffect(() => {
     const apiGoals = 'http://localhost:8081/api/goals';
     const apiUsers = 'http://localhost:8081/api/users';
@@ -215,7 +228,7 @@ export default function useApplicationData() {
     const apiExpenses = 'http://localhost:8081/api/expenses';
     const apiDataPoints = 'http://localhost:8081/api/dataPoints';
     const apiCurrencySymbols = 'https://api.currencyfreaks.com/currency-symbols';
-    const apiExchangeRates = 'https://api.currencyfreaks.com/latest?apikey=bd341fe5384842489348b286b255c67a';
+    const apiExchangeRates = 'https://api.currencyfreaks.com/latest?apikey=5b3f999f6f8f46eb9ed500c44b821491';
 
     Promise.all([
       axios.get(apiGoals),

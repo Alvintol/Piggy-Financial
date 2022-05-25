@@ -1,38 +1,43 @@
 import React from 'react';
-import SingleExpense from './SingleExpense';
-import { getCategoryName, getExpenseById, filteredVacationExpenses, getGoalByID } from '../../helpers/helper_functions';
 import "../../sass/signup.scss"
+import SingleExpense from './SingleExpense';
+import {
+  filteredVacationExpenses,
+  getCategoryName,
+  getExpensesById,
+  getGoalByID
+} from '../../helpers/helper_functions';
 
-export default function ExpenseTable(props) {
+const ExpenseTable = props => {
 
-  const vacation = getGoalByID(props.goals, props.userId)
-  
+  const vacation = getGoalByID(props.goals, props.userId);
+
   const filteredExpensesById =
     props.vacationMode ?
       filteredVacationExpenses(props.expenses, props.userId, vacation.start_date) :
-      getExpenseById(props.expenses, props.userId);
+      getExpensesById(props.expenses, props.userId);
 
   const expenses = filteredExpensesById.map(expense => {
     const categoryName = getCategoryName(expense.category_id);
 
-    const classname = (prop) => {
+    const classname = prop => {
       switch (prop) {
         case 'Income': return 'Income';
         case 'Savings': return 'Savings';
         default: return 'Expense';
-      }
+      };
     };
 
     return (
       <SingleExpense
-        key={expense.id}
         id={expense.id}
-        created_at={expense.created_at}
-        category_name={expense.category_name || categoryName}
+        key={expense.id}
         amount={expense.amount}
-        classname={classname(expense.category_name || categoryName)}
-        removeExpense={props.removeExpense}
+        created_at={expense.created_at}
         vacationMode={props.vacationMode}
+        removeExpense={props.removeExpense}
+        category_name={expense.category_name || categoryName}
+        classname={classname(expense.category_name || categoryName)}
       />
     )
   });
@@ -47,9 +52,13 @@ export default function ExpenseTable(props) {
           <td>Amount</td>
         </tr>
       </thead>
-      <tbody id='expense-table' className='list-group infinite-scroll fw-bold'>
+      <tbody
+        id='expense-table'
+        className='list-group infinite-scroll fw-bold'>
         {expenses}
       </tbody>
     </table>
   );
 };
+
+export default ExpenseTable;

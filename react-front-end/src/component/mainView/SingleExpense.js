@@ -1,17 +1,20 @@
 import React from 'react';
+import "../../sass/expenses.scss";
 import classNames from 'classnames';
-import "../../sass/expenses.scss"
-export default function SingleExpense(props) {
+
+const SingleExpense = props => {
+
+  // Adds a class based on what the expense is categorized
   const tableClass = classNames('d-flex justify-content-around position-relative', {
     'table-warning': props.classname === 'Savings',
     'table-danger': props.classname === 'Expense',
     'table-success': props.classname === 'Income'
   });
 
+  // Deletes an expense from the database
   const removeExpense = (id) => {
     props.removeExpense(id);
   }
-
   
   return (
     <tr key={props.id} id={props.id} className={tableClass}>
@@ -28,3 +31,5 @@ export default function SingleExpense(props) {
     </tr>
   )
 };
+
+export default SingleExpense;

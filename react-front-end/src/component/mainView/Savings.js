@@ -7,17 +7,22 @@ import {
 	getGoalByID,
 	getSavingsByID,
 } from '../../helpers/helper_functions';
-import classNames from 'classnames';
+import {
+	toggleClassNameBlur, toggleDisappearText, togglePiggyAppear, togglePiggyBreak, toggleVacationMode,
+} from '../../helpers/helper_classnames';
 
-export default function Savings(props) {
-	// gets total amount of saved money
+
+const Savings = props => {
+
+	// Retrieves total amount of saved money
 	const savingsbyID = getSavingsByID(props.savings, props.userId);
-
 	const totalSaved = getTotalAmount(savingsbyID);
-	// gets days until end date for goal
+
+	// Retrieves days until end date for goal & total amount saving for
 	const goalByID = getGoalByID(props.goals, props.userId);
-	const totalGoal = getTotalAmount(goalByID);
 	const totalDaysTillGoal = getDaysTillGoal(goalByID);
+	const totalGoal = getTotalAmount(goalByID);
+
 	const [state, setState] = useState({
 		input: 'appear',
 		switch: 'Off',
@@ -33,68 +38,63 @@ export default function Savings(props) {
 		end_date: goalByID.end_date,
 	});
 
+	// Edits user goal in database
 	const onChange = newGoal => {
 		props.updateGoals(goalByID.id, newGoal);
-		setState({ ...state, vacation: '' }
-		)
+		setState(prev => {
+			return { ...prev, vacation: '' }
+		})
 	};
 
+	// Controls state of Day switch
 	const dayClick = () => {
-		setState({
-			...state,
-			day: !state.day,
-			switch: !state.switch ? 'ON' : 'OFF',
+		setState(prev => {
+			return {
+				...prev,
+				day: !state.day,
+				switch: !state.switch ? 'ON' : 'OFF',
+			}
 		});
 	};
-
+	// Controls state of Week switch
 	const weekClick = () => {
-		setState({
-			...state,
-			week: !state.week,
-			switch: !state.switch ? 'ON' : 'OFF',
+		setState(prev => {
+			return {
+				...prev,
+				week: !state.week,
+				switch: !state.switch ? 'ON' : 'OFF'
+			}
 		});
 	};
-
+	// Controls state of Month switch
 	const monthClick = () => {
-		setState({
-			...state,
-			month: !state.month,
-			switch: !state.switch ? 'ON' : 'OFF',
+		setState(prev => {
+			return {
+				...state,
+				month: !state.month,
+				switch: !state.switch ? 'ON' : 'OFF',
+			}
 		});
 	};
+	// Controls state of Year switch
 	const yearClick = () => {
-		setState({
-			...state,
-			year: !state.year,
-			switch: !state.switch ? 'ON' : 'OFF',
+		setState(prev => {
+			return {
+				...state,
+				year: !state.year,
+				switch: !state.switch ? 'ON' : 'OFF',
+			}
 		});
 	};
 
-	const piggyAppear = classNames('pig-image', {
-		'disappear': state.input === 'disappear' ||
-			state.vacation === 'ON'
-	});
+	// Adds or removes a class based on state.input or state.vacation
+	const disappearText = toggleDisappearText(state);
+	const vacationMode = toggleVacationMode(state);
+	const piggyAppear = togglePiggyAppear(state);
+	const piggyBreak = togglePiggyBreak(state);
+	const blur = toggleClassNameBlur(state);
 
-	const piggyBreak = classNames('pig-break border border-4', {
-		'disappear': state.input !== 'disappear' ||
-			state.vacation === 'ON'
-	});
-
-	const vacationMode = classNames('button-vac', {
-		'disappear': state.vacation === 'ON'
-	})
-
-	const blur = classNames('', {
-		'blur': state.input !== 'disappear'
-	})
-
-	const disappearText = classNames('break-title', {
-		'disappear': state.vacation === 'ON'
-	})
-	//  if the DAYS until END DATE is less than a WEEK then DO NOT RENDER
-	//  if the DAYS until END DATE is less than a MONTH then DO NOT RENDER
-	//  if the DAYS until END DATE is less than a YEAR then DO NOT RENDER
-	// gets money per day/week/month/year
+	// Calculates money per day/week/month/year
 	const moneyTillGoal = totalGoal - totalSaved;
 	const moneyPerDayToGoal =
 		'$' + (moneyTillGoal / totalDaysTillGoal / 100).toFixed(2);
@@ -371,4 +371,6 @@ export default function Savings(props) {
 				</div>}
 		</div>
 	);
-}
+};
+
+export default Savings;

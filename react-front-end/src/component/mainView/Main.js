@@ -1,78 +1,76 @@
 import React from 'react';
+import '../../sass/main.scss';
 import TopNav from './TopNav';
 import BotNav from './BotNav';
+import Profile from './Profile';
 import Savings from './Savings';
 import Expenses from './Expenses';
-import Profile from './Profile';
 import Vacation from '../mainView/Vacation/Vacation';
 import useVisualMode from '../../hooks/useVisualMode';
-import '../../sass/main.scss';
 
-export default function Main(props) {
+const Main = props => {
 
   const PROFILE = 'PROFILE';
   const SAVINGS = 'SAVINGS';
   const EXPENSES = 'EXPENSES';
   const VACATION = 'VACATION';
+  const { transition } = useVisualMode(props.state.tab);
   
-  const { transition } = useVisualMode(props.tab);
   return (
     <div>
       <TopNav
         key='topnav'
-        savings={props.savings}
-        userId={props.userId}
         users={props.users}
+        userId={props.userId}
+        savings={props.savings}
       />
       {props.state.tab === PROFILE && <Profile
         key='profile'
-        removeGoal={props.removeGoal}
-        userId={props.userId}
         users={props.users}
+        goals={props.goals}
+        userId={props.userId}
         incomes={props.incomes}
         savings={props.savings}
-        goals={props.goals}
+        removeGoal={props.removeGoal}
         updateGoals={props.updateGoals}
-        currentCurrency={props.state.currentCurrency}
-        exchangeRates={props.state.exchangeRates}
         vacationMode={props.state.vacationMode}
+        exchangeRates={props.state.exchangeRates}
+        currentCurrency={props.state.currentCurrency}
       />}
       {props.state.tab === SAVINGS && <Savings
         key='savings'
+        goals={props.goals}
         userId={props.userId}
         incomes={props.incomes}
         savings={props.savings}
-        goals={props.goals}
         updateGoals={props.updateGoals}
       />}
       {props.state.tab === EXPENSES && <Expenses
         key='expenses'
-        addExpense={props.addExpense}
+        state={props.state}
+        goals={props.goals}
         userId={props.userId}
         expenses={props.expenses}
         dataPoints={props.dataPoints}
-        goals={props.goals}
-        removeExpense={props.removeExpense}
+        addExpense={props.addExpense}
         vacationMode={props.vacationMode}
-        vacationData={props.alvinVacationSpent}
-        currencySymbols={props.state.currencySymbols}
+        removeExpense={props.removeExpense}
         changeCurrency={props.changeCurrency}
-        currentCurrency={props.state.currentCurrency}
+        vacationData={props.alvinVacationSpent}
         exchangeRates={props.state.exchangeRates}
-        state={props.state}
+        currencySymbols={props.state.currencySymbols}
+        currentCurrency={props.state.currentCurrency}
       />}
       {props.state.tab === VACATION && <Vacation
         key='vacation'
-        savings={props.savings}
-        userId={props.userId}
         goals={props.goals}
+        userId={props.userId}
+        savings={props.savings}
         expenses={props.expenses}
         vacationMode={props.vacationMode}
-        currentCurrency={props.state.currentCurrency}
         exchangeRates={props.state.exchangeRates}
+        currentCurrency={props.state.currentCurrency}
       />}
-
-
       <BotNav
         key='botnav'
         transition={transition}
@@ -81,4 +79,6 @@ export default function Main(props) {
       />
     </div>
   );
-}
+};
+
+export default Main;

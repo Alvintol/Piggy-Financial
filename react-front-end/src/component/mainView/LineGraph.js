@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
-import '../../sass/login.scss';
+import { Line } from 'react-chartjs-2';
+import 'chartjs-adapter-date-fns';
 import '../../sass/expenses.scss';
+import '../../sass/login.scss';
 import {
   getGoalByID,
   getDataByID,
   getVacationData,
+  getCurrenciesOptions,
   filterSavingsDataPoints, 
-  getCurrenciesOptions
 } from '../../helpers/helper_functions';
 import {
   Chart,
-  LineElement,
-  PointElement,
-  LineController,
-  CategoryScale,
-  LinearScale,
   Legend,
   Tooltip,
-  TimeScale
+  TimeScale,
+  LinearScale,
+  LineElement,
+  PointElement,
+  CategoryScale,
+  LineController,
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import 'chartjs-adapter-date-fns';
 
 Chart.register(
   LineElement,
@@ -32,52 +32,55 @@ Chart.register(
   Tooltip,
   TimeScale);
 
-export default function LineGraph(props) {
+const LineGraph = props => {
 
+  //  Retrieves line graph data
   const goal = getGoalByID(props.goals, props.user)
   const dataPoints = getDataByID(props.dataPoints, props.user)
-
-
-
   const currencies = getCurrenciesOptions(props.currencySymbols); 
 
   let graphData = {
-    updatePoints: [],
     total: '',
+    trackData: [],
     trackLine: '',
     trackUnits: '',
-    trackData: [],
+    borderColor: '',
+    updatePoints: [],
     backgroundColor: '',
-    borderColor: ''
-  }
-
+  };
+  
+  // Loads Savings Data
   if (!props.vacationMode) {
 
     graphData = {
       ...graphData,
       total: 'Savings',
-      trackLine: goal.goal_name,
       trackUnits: 'month',
+      trackLine: goal.goal_name,
       trackData: [
         { x: goal.start_date, y: 0 },
         { x: goal.end_date, y: goal.amount / 100 }
       ],
       backgroundColor: '#FFA10A',
       borderColor: '#FFA10A'
-    }
+    };
 
-    graphData.updatePoints.push({ x: goal.start_date, y: 0 })
+    // Adds starting point on line graph
+    graphData.updatePoints.push({ x: goal.start_date, y: 0 });
 
+    // Populates the rest of savings data
     filterSavingsDataPoints(dataPoints, 8).forEach(point => {
       graphData.updatePoints.push({ ...point, y: graphData.updatePoints.slice(-1)[0].y + (point.y / 100) })
-    })
+    });
+
+    // Loads Spending Data
   } else if (props.vacationMode) {
 
     graphData = {
       ...graphData,
       total: 'Savings',
-      trackLine: 'Budget',
       trackUnits: 'day',
+      trackLine: 'Budget',
       trackData: [
         { x: goal.start_date, y: goal.amount / 100 },
         { x: goal.end_date, y: 0 }
@@ -86,12 +89,15 @@ export default function LineGraph(props) {
       borderColor: 'rgba(220, 38, 38, 0.7)',
     }
 
-    const vacationData = getVacationData(dataPoints, goal.start_date)
-    graphData.updatePoints.push({ x: goal.start_date, y: goal.amount / 100 })
+    // Retrieves data from vacation start date
+    const vacationData = getVacationData(dataPoints, goal.start_date);
+    // Adds starting point on line graph
+    graphData.updatePoints.push({ x: goal.start_date, y: goal.amount / 100 });
 
+    // Populates the rest of spending data
     vacationData.forEach(point => {
       graphData.updatePoints.push({ ...point, y: graphData.updatePoints.slice(-1)[0].y - (point.y / 100) })
-    })
+    });
 
   }
 
@@ -135,6 +141,7 @@ export default function LineGraph(props) {
             maintainAspectRatio: false,
             responsive: true,
             scales: {
+              // Bottom labels of graph
               x: {
                 type: 'time',
                 time: {
@@ -142,9 +149,9 @@ export default function LineGraph(props) {
                 },
                 beginAtZero: true
               },
+              // Left labels of graph
               y: {
                 ticks: {
-                  // Include a dollar sign in the ticks
                   callback: function (value, index, ticks) {
                     return parseInt(value * (state.exchangeRate || 1)) + ` ${state.currency}`;
                   }
@@ -157,7 +164,7 @@ export default function LineGraph(props) {
       </div>
       <br />
       <div className='d-flex align-items-center m-2 justify-content-center' >
-
+          
         {props.vacationMode &&
           <div className='d-flex align-items-center m-2 justify-content-center w-25'>
             <input
@@ -199,3 +206,5 @@ export default function LineGraph(props) {
     </div>
   );
 }
+
+export default LineGraph;

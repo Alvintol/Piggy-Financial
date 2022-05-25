@@ -1,8 +1,10 @@
 import React from 'react';
 
-export function getTotalExpensesForUser(state, user) {
-  const filteredExpenses = state.expenses.filter((expenses) => expenses.username === user);
-  const totalExpense = filteredExpenses.reduce((previous, current) => previous + current.amount, 0);
+export const getTotalExpensesForUser = (state, user) => {
+  const filteredExpenses = state.expenses.filter((expenses) =>
+    expenses.username === user);
+  const totalExpense = filteredExpenses.reduce((previous, current) =>
+    previous + current.amount, 0);
   return '$' + (totalExpense / 100).toFixed(2);
 };
 
@@ -10,6 +12,10 @@ export const getUserByID = (users, id) =>
   users.find(user =>
     user.id === id
   );
+
+export const getUserByEmail = (email, state) =>
+  state.find(user =>
+    user.email === email);
 
 export const getSavingsByID = (expenses, id) =>
   expenses.filter(expense =>
@@ -38,11 +44,15 @@ export const filterVacationDataPoints = (data, categoryID1, categoryID2) =>
     (item.category_id !== categoryID1 &&
       item.category_id !== categoryID2));
 
-export function getExpenseById(expenses, id) {
-  return expenses.filter(expense =>
+export const getExpensesById = (expenses, id) =>
+  expenses.filter(expense =>
     expense && expense.user_id === parseInt(id)
   );
-};
+
+export const getFirstExpenseByID = expenses =>
+  expenses.find(expense =>
+    !Array.isArray(expense)
+  );
 
 export function getDaysTillGoal(state) {
   const today = Date.now();
@@ -53,13 +63,13 @@ export function getDaysTillGoal(state) {
 };
 
 export function getTotalAmount(state) {
-
   if (Array.isArray(state)) {
-
-    const amountList = state.map(expense => expense.amount);
+    const amountList = state.map(expense =>
+      expense.amount);
 
     return amountList.length > 1 ?
-      amountList.reduce((first, next) => first + next) :
+      amountList.reduce((first, next) =>
+        first + next) :
       amountList;
   } else {
     return state.amount;
@@ -98,10 +108,11 @@ export const getVacationExpenses = (stateExpense, userId) => {
 export const filteredVacationExpenses = (expenses, id, date) =>
   expenses.filter(expense =>
     expense &&
+    expense.user_id === id &&
     expense.category_id !== 5 &&
     expense.category_id !== 8 &&
-    expense.user_id === id &&
-    expense.created_at >= date);
+    expense.created_at >= date
+  );
 
 export const getVacationData = (data, date) =>
   data.filter(item =>
@@ -122,21 +133,18 @@ export const getNewList = (list, itemID) => {
     });
 }
 
-export const getUserByEmail = (email, state) => state.find(user => user.email === email);
-
 export const getCurrenciesOptions = currencyList => {
   const symbols = Object.keys(currencyList)
-  return symbols.map((currency, ii) => {
-    return <option key={ii} value={symbols[ii]}>{currencyList[currency]}</option>
-  }
+  return symbols.map((currency, ii) =>
+    <option key={ii} value={symbols[ii]}>{currencyList[currency]}</option>
   )
 };
 
-export const getAvatarByID = (id) => {
+export const getAvatarByID = id => {
   switch (id) {
-    case 1: return 'https://i.ibb.co/nc44FGT/facetache1-removebg-preview.png';
-    case 2: return "https://i.ibb.co/T2KhqWV/facetache2-removebg-preview.png";
-    case 3: return "https://i.ibb.co/vddQFFh/facetachehat-removebg-preview.png";
+    case 1: return 'https://i.imgur.com/PlygbNn.png';
+    case 2: return "https://i.imgur.com/JhdCVtg.png";
+    case 3: return "https://i.imgur.com/irhlqpa.png";
     default: return "../../person-icon.jpeg";
   }
 }

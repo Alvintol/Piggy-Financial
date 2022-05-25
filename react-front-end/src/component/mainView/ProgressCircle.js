@@ -1,17 +1,17 @@
 import React from "react";
 import '../../sass/savings.scss';
-
-// Import module and default styles
-// import CircularProgressbar, { buildStyles } from "react-circular-progressbar";
-import CircularProgressbar from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import CircularProgressbar from "react-circular-progressbar";
 
+const ProgressCircle = props => {
 
-const ProgressCircle = (props) => {
+  // If Vacation mode is activated, reverse the display of the progress circle percentage
+  const percentage =
+    props.vacationMode ?
+      (100 - ((props.total_saved / props.goalTotal_cents) * 100)).toFixed(1) :
+      ((props.total_saved / props.goalTotal_cents) * 100).toFixed(1);
 
-  const percentage = ((props.total_saved / props.goalTotal_cents) * 100).toFixed(1);
   return (
-
     <div>
       <div className='circle' style={{ width: "80%" }}>
         <CircularProgressbar
@@ -37,5 +37,3 @@ const ProgressCircle = (props) => {
 };
 
 export default ProgressCircle
-
-
