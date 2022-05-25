@@ -59,8 +59,8 @@ KEVIN:
 ALVIN:
 
 - ```In my page you can see I was initially saving for a car```
-- ```But, lets say my mind has been changed post boot camp, and I now need a vacation instead```
-- ```We only need about $700.```
+- ```But, lets say I change my mind post boot camp, and I now need a vacation instead```
+- ```We look at our savings and see we only need about $700.```
 - ```We just won a bet against Kevin and lets throw that money into our savings to hit our goal!```
 - ```Now lets go break that piggy we also that vacation mode is accessible only if you are saving for a vacation```
 (break the pig)
@@ -76,11 +76,16 @@ ALVIN:
 
 - ```This is Piggy Financial!```
 
-the biggest challenge our team had was making sure all of our apis and front end were communicating to properly display information dynamically
+the biggest challenge we had was making sure all of our apis and front end were communicating to properly display information dynamically
 
 
 ## Further developments (30-60 sec): in the future, we'd like to explore x and y, etc.
+If we had more time
+
 - set up proper authentication with our login & cookies
 - bar graph that displays where all your money is going
 - saving data to our expense table in other currencies
 - geo locating for currency suggestions over seas
+
+
+```THANK YOU!```
