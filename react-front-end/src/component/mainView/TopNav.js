@@ -1,12 +1,15 @@
 import React from 'react';
 import '../../sass/topNav.scss'
-import { getUserByID, getAvatarByID } from '../../helpers/helper_functions';
+import {
+  getUserByID,
+  getAvatarByID
+} from '../../helpers/helper_functions';
 
-export default function TopNav(props) {
+const TopNav = props => {
 
-  const username = getUserByID(props.users, props.userId).username
-
-  const photo = getAvatarByID(props.userId)
+  // Retrieves user information to display
+  const username = getUserByID(props.users, props.userId).username;
+  const photo = getAvatarByID(props.userId);
 
   return (
     <nav className="nav-top navbar navbar-expand-lg navbar-light bg-light top-nav-items">
@@ -32,7 +35,6 @@ export default function TopNav(props) {
         </div>
         <div className='w-100 d-flex justify-content-end'>
           <div id='nav-right' className="fw-bold d-flex align-items-center">
-            {/* <!-- Avatar --> */}
             <div id='nav-username' className="dropdown d-flex align-items-center">
               Welcome {username}!!
               <img
@@ -53,8 +55,9 @@ export default function TopNav(props) {
             </div>
           </div>
         </div>
-        {/* <!-- Right elements --> */}
       </div>
     </nav>
   );
-}
+};
+
+export default TopNav;
