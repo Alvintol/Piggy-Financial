@@ -1,64 +1,57 @@
+import useVisualMode from '../../hooks/useVisualMode';
+import ExpenseTable from './ExpenseTable';
 import React, { useState } from 'react';
 import LineGraph from './LineGraph';
-import ExpenseTable from './ExpenseTable';
-import useVisualMode from '../../hooks/useVisualMode';
 import '../../sass/expenses.scss';
 import '../../sass/login.scss';
-import { getCategoryName, getCurrenciesOptions } from '../../helpers/helper_functions';
-import classNames from 'classnames';
+import {
+	getCategoryName,
+	getFirstExpenseByID,
+	getCurrenciesOptions
+} from '../../helpers/helper_functions';
+import {
+	toggleClassNameExpenseInput,
+	toggleRemoveIncomeButton,
+	toggleClassNameBlur,
+	toggleRemoveMapview
+} from '../../helpers/helper_classnames';
 
-export default function Expenses(props) {
+const Expenses = props => {
 	const [state, setState] = useState({
 		date: '',
 		amount: 0,
-		category_name: 'category',
 		category_id: 0,
 		input: 'disappear',
-		goal_name: 'Vacation: Iceland',
 		goal_amount: 3000000,
+		category_name: 'category',
+		goal_name: 'Vacation: Iceland',
 		currency: props.currentCurrency || 'USD',
 		exchangeRate: props.exchangeRates.rates[props.currentCurrency]
 	});
 
-	const expenseInput = classNames('vw-50  align-items-center', {
-		'disappear': state.input === 'disappear',
-		'card': state.input !== 'disappear'
-	});
-
-	const blur = classNames('', {
-		'blur': state.input !== 'disappear'
-	});
-
-	const removeIncomeButton = classNames('w-25 gradient-custom-4 text-dark', {
-		'disappear': state.input !== 'disappear',
-		'graph-thumbnail': state.input === 'appear',
-		'card vw-50  align-items-center': state.input !== 'appear'
-	});
-
-	const removeMapview = classNames('text-center w-50', {
-		'disappear': state.input !== 'disappear',
-		'btn card': state.input === 'disappear'
-	});
-
-
-	const LINE = 'LINE';
+	// Add or removes a class based on state.input
+	const removeIncomeButton = toggleRemoveIncomeButton(state)
+	const expenseInput = toggleClassNameExpenseInput(state);
+	const removeMapview = toggleRemoveMapview(state)
+	const blur = toggleClassNameBlur(state);
 	const EXPENSES = 'EXPENSES';
+	const LINE = 'LINE';
 
 	const { mode, transition, back } = useVisualMode(EXPENSES);
 
-	const expenseID = props.expenses.find(expense => !Array.isArray(expense))
 	const currencies = getCurrenciesOptions(props.currencySymbols)
+	const expenseID = getFirstExpenseByID(props.expenses)
 
-	const submit = (id, user_id, created_at, amount, category_id, category_name, goal_name, goal_amount) => {
+	const submit = input => {
 		const expense = {
-			id,
-			user_id,
-			created_at,
-			amount,
-			category_id,
-			category_name,
-			goal_name,
-			goal_amount,
+			id: input.expense_id,
+			user_id: input.user_id,
+			created_at: input.date,
+			amount: input.amount,
+			category_id: input.category_id,
+			category_name: input.category_name,
+			goal_name: input.goal_name,
+			goal_amount: input.goal_amount,
 			currentCurrency: state.currency
 		};
 		setState(prev => {
@@ -125,9 +118,11 @@ export default function Expenses(props) {
 											e.persist();
 											props.changeCurrency(e.target.value)
 											setState(prev => {
-												return { ...prev, 
-													currency: e.target.value, 
-													exchangeRate: props.exchangeRates.rates[e.target.value] }
+												return {
+													...prev,
+													currency: e.target.value,
+													exchangeRate: props.exchangeRates.rates[e.target.value]
+												}
 											})
 										}}
 									/>
@@ -218,15 +213,17 @@ export default function Expenses(props) {
 									className="btn btn-primary submit text-dark m-1 gradient-custom-3"
 									onClick={e => {
 										e.preventDefault();
-										submit(
-											expenseID.id + 1 || props.expenses.length + 1,
-											props.userId,
-											state.date,
-											state.amount,
-											state.category_id,
-											state.category_name,
-											state.goal_name,
-											state.goal_amount
+										submit({
+											expense_id: expenseID.id + 1 ||
+												props.expenses.length + 1,
+											user_id: props.userId,
+											date: state.date,
+											amount: state.amount,
+											category_id: state.category_id,
+											category_name: state.category_name,
+											goal_name: state.goal_name,
+											goal_amount: state.goal_amount
+										}
 										);
 									}}
 								>
@@ -275,3 +272,4 @@ export default function Expenses(props) {
 		</div>
 	);
 }
+export default Expenses

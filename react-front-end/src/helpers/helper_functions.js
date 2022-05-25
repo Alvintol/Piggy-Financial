@@ -44,11 +44,15 @@ export const filterVacationDataPoints = (data, categoryID1, categoryID2) =>
     (item.category_id !== categoryID1 &&
       item.category_id !== categoryID2));
 
-export function getExpenseById(expenses, id) {
-  return expenses.filter(expense =>
+export const getExpensesById = (expenses, id) =>
+  expenses.filter(expense =>
     expense && expense.user_id === parseInt(id)
   );
-};
+
+export const getFirstExpenseByID = expenses =>
+  expenses.find(expense =>
+    !Array.isArray(expense)
+  );
 
 export function getDaysTillGoal(state) {
   const today = Date.now();

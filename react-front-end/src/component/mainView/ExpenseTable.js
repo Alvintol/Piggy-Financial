@@ -1,6 +1,6 @@
 import React from 'react';
 import SingleExpense from './SingleExpense';
-import { getCategoryName, getExpenseById, filteredVacationExpenses, getGoalByID } from '../../helpers/helper_functions';
+import { getCategoryName, getExpensesById, filteredVacationExpenses, getGoalByID } from '../../helpers/helper_functions';
 import "../../sass/signup.scss"
 
 export default function ExpenseTable(props) {
@@ -10,7 +10,7 @@ export default function ExpenseTable(props) {
   const filteredExpensesById =
     props.vacationMode ?
       filteredVacationExpenses(props.expenses, props.userId, vacation.start_date) :
-      getExpenseById(props.expenses, props.userId);
+      getExpensesById(props.expenses, props.userId);
 
   const expenses = filteredExpensesById.map(expense => {
     const categoryName = getCategoryName(expense.category_id);
