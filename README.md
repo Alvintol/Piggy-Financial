@@ -16,9 +16,6 @@ Piggy Financial is an app that aims to help users track their financial goals. W
 
 Use the `psql -U vagrant` command to login to the PostgreSQL server with the username `vagrant` and the password `123`. This command `MUST` be run in a vagrant terminal, we are using the PostgreSQL installation provided in a vagrant environment.
 
-`cd` into `Piggy-Financial` folder. 
-Create a database with the command `CREATE DATABASE piggy;`.\
-Run command `/i express-back-end/src/db/schema/create.sql` 
 
 Copy the `.env.example` file to `.env` and fill in the necessary PostgreSQL configuration. The node-postgres library uses these environment variables by default.
 This should look like this below:
@@ -31,17 +28,20 @@ DB_USER=vagrant
 DB_PASS=123
 ```
 
-Run the command `\i express-back-end/src/db/seeds/allinone.sql` to populate the seed data to the tables.
+`cd` into `Piggy-Financial` folder. 
+Create a database with the command `CREATE DATABASE piggy;`.\
+Run command `/i express-back-end/src/db/schema/create.sql` \
+Run command `\i express-back-end/src/db/seeds/allinone.sql` to populate the seed data to the tables.
 
 ## Running the project
 
-You need **TWO** terminal windows/tabs for this (or some other plan for running two Node processes).
+You need **TWO** other terminal windows/tabs for this (or some other plan for running two Node processes).
 
-In one terminal, `cd` into `react-front-end`. Run `npm install` or `yarn` to install the dependencies. Then run `npm start` or `yarn start`, and go to `localhost:3000` in your browser.
+In one terminal, `cd` into `react-front-end`. Run `npm install` or `yarn` to install the dependencies. Then run `npm start` or `yarn start`, and go to `localhost:8000` in your browser.
 
 In the other terminal, `cd` into `express-back-end`. Run `npm install` or `yarn` to install the dependencies, then `npm start` or `yarn start` to launch the server.
 
-Enter app using only the following credentials:
+Enter app using only one of the following credentials:
 
 ```
 User: 
