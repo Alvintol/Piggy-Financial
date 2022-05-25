@@ -14,7 +14,7 @@ const Main = props => {
   const SAVINGS = 'SAVINGS';
   const EXPENSES = 'EXPENSES';
   const VACATION = 'VACATION';
-  const { transition } = useVisualMode(props.tab);
+  const { transition } = useVisualMode(props.state.tab);
   
   return (
     <div>

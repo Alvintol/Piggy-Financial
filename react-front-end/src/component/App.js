@@ -51,7 +51,6 @@ const App = () => {
         key='main'
         back={back}
         state={state}
-        tab={state.tab}
         userId={state.user}
         users={state.users}
         goals={state.goals}

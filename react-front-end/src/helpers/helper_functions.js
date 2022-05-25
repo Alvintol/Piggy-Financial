@@ -142,9 +142,9 @@ export const getCurrenciesOptions = currencyList => {
 
 export const getAvatarByID = id => {
   switch (id) {
-    case 1: return 'https://i.ibb.co/nc44FGT/facetache1-removebg-preview.png';
-    case 2: return "https://i.ibb.co/T2KhqWV/facetache2-removebg-preview.png";
-    case 3: return "https://i.ibb.co/vddQFFh/facetachehat-removebg-preview.png";
+    case 1: return 'https://i.imgur.com/PlygbNn.png';
+    case 2: return "https://i.imgur.com/JhdCVtg.png";
+    case 3: return "https://i.imgur.com/irhlqpa.png";
     default: return "../../person-icon.jpeg";
   }
 }
