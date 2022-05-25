@@ -8,7 +8,7 @@ import Expenses from './Expenses';
 import Vacation from '../mainView/Vacation/Vacation';
 import useVisualMode from '../../hooks/useVisualMode';
 
-export default function Main(props) {
+const Main = props => {
 
   const PROFILE = 'PROFILE';
   const SAVINGS = 'SAVINGS';
@@ -79,4 +79,6 @@ export default function Main(props) {
       />
     </div>
   );
-}
+};
+
+export default Main;
