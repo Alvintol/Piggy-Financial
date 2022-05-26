@@ -33,3 +33,7 @@ nav #nav-container .fa-piggy-bank {
   left: 25px;
   top: 20px;
 }
+nav #nav-avatar {
+  transform: scale(1.7);
+  margin-left: 2%;
+}
