@@ -52,8 +52,9 @@ KEVIN:
 - ```For now I'm going to send $300 to my savings to hit my goal```
 - ```And the graph will dynamically change accordingly ```
 - ```And if you hover over each mark```
+- ```it will display the date and how much I saved at that time```
 - ```Once we hit our goal the piggy bank is full!```
-- ```Now we can click it to break it open!!```
+- ```Let's click it to break it open!!```
 - ```WOOHOO!```
 - ```I'll pass it off to Alvin to handle the rest of our features```
 
@@ -64,7 +65,7 @@ ALVIN:
 - ```We look at our savings and see we only need about $700.```
 - ```We just won a bet against Kevin recently and lets throw that money into our savings to hit our goal!```
 - ```As you can see, I've very bad at keeping steady with my goals```
-- ```The green guide line helped me visualize that I've veered off course and helped me kind of correct it few times in this process```
+- ```The guide line helped me visualize that I've veered off course and helped me kind of correct it few times in this process```
 - ```Now lets go break that piggy!```
 - ```We can now see that vacation mode is accessible since we were are saving for a vacation```\
 (break the pig)\
