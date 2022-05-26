@@ -19,7 +19,7 @@ The Piggy Team:
 
 ## Creating the DB
 
-Copy the `.env.example` file to `.env` and fill in the necessary PostgreSQL configuration. The node-postgres library uses these environment variables by default.
+Copy the `.env.example` file to `.env` in `express-back-end` and fill in the necessary PostgreSQL configuration. The node-postgres library uses these environment variables by default.
 This should look like this below:
 
 ```
@@ -41,6 +41,16 @@ Run command to create the tables:
 Run command to populate the seed data to the tables: 
 
 ```\i express-back-end/src/db/seeds/allinone.sql;```
+
+## Setting up API KEY
+
+In order to use the API, you need to sign up at https://currencyfreaks.com/. It does not require a credit card. 
+Copy the `.env.example` file to `.env` in `react-front-end` and fill in the API KEY like the following:
+
+```
+CHOKIDAR_USEPOLLING=true
+REACT_APP_APIKEY= <API-KEY>
+```
 
 ## Running the project
 
@@ -64,7 +74,7 @@ Password: `1`
 ```
 
 ## Dependencies
-
+ - `CurrencyFreak API` - Provides exchange rates of 350 currencies worldwide.
  - `Axios`: Javascript library used to make HTTP requests from node. js or XMLHttpRequests from the browser and it supports the Promise API that is native to JS ES6
  - `Bcryptjs`: Password encryption in Node.js 
  - `Chart.js`: JavaScript library for data visualization, which supports eight chart types
