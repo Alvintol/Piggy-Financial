@@ -10,17 +10,23 @@ import {
 
 const ExpenseTable = props => {
 
-  const vacation = getGoalByID(props.goals, props.userId);
+  // Destructured props
+  const {
+    state,
+    removeExpense,
+  } = props;
+
+  const vacation = getGoalByID(state.goals, state.user);
 
   const filteredExpensesById =
-    props.vacationMode ?
-      filteredVacationExpenses(props.expenses, props.userId, vacation.start_date) :
-      getExpensesById(props.expenses, props.userId);
+    state.vacationMode ?
+      filteredVacationExpenses(state.expenses, state.user, vacation.start_date) :
+      getExpensesById(state.expenses, state.user);
 
   const expenses = filteredExpensesById.map(expense => {
     const categoryName = getCategoryName(expense.category_id);
 
-    const classname = prop => {
+    const toggleClass = prop => {
       switch (prop) {
         case 'Income': return 'Income';
         case 'Savings': return 'Savings';
@@ -34,10 +40,9 @@ const ExpenseTable = props => {
         key={expense.id}
         amount={expense.amount}
         created_at={expense.created_at}
-        vacationMode={props.vacationMode}
-        removeExpense={props.removeExpense}
+        removeExpense={removeExpense}
         category_name={expense.category_name || categoryName}
-        classname={classname(expense.category_name || categoryName)}
+        toggleClass={toggleClass(expense.category_name || categoryName)}
       />
     )
   });

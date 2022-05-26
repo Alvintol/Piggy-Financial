@@ -82,7 +82,6 @@ const Expenses = props => {
 			{mode === LINE && (
 				<LineGraph
 					key='savingGraph'
-					back={back}
 					state={props.state}
 					transition={transition}
 					changeCurrency={changeCurrency}
@@ -93,15 +92,7 @@ const Expenses = props => {
 					<ExpenseTable
 						key='expenseTable'
 						state={props.state}
-						goals={props.state.goals}
-						userId={props.state.user}
-						expenses={props.state.expenses}
-						vacationMode={props.state.vacationMode}
 						removeExpense={removeExpense}
-						changeCurrency={props.state.changeCurrency}
-						currencySymbols={props.state.currencySymbols}
-						exchangeRates={props.state.exchangeRates}
-						currentCurrency={props.state.currentCurrency}
 					/>
 					<div id='input-card' className={expenseInput}>
 						<form className={"d-flex justify-content-around row row-cols-lg-auto g-3 align-items-center p-3"}>

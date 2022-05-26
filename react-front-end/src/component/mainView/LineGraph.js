@@ -8,7 +8,7 @@ import {
   getDataByID,
   getVacationData,
   getCurrenciesOptions,
-  filterSavingsDataPoints, 
+  filterSavingsDataPoints,
 } from '../../helpers/helper_functions';
 import {
   Chart,
@@ -34,10 +34,16 @@ Chart.register(
 
 const LineGraph = props => {
 
+  // Destructured props
+  const {
+    transition,
+    changeCurrency
+  } = props;
+
   //  Retrieves line graph data
   const goal = getGoalByID(props.state.goals, props.state.user)
   const dataPoints = getDataByID(props.state.dataPoints, props.state.user)
-  const currencies = getCurrenciesOptions(props.state.currencySymbols); 
+  const currencies = getCurrenciesOptions(props.state.currencySymbols);
 
   let graphData = {
     total: '',
@@ -48,7 +54,7 @@ const LineGraph = props => {
     updatePoints: [],
     backgroundColor: '',
   };
-  
+
   // Loads Savings Data
   if (!props.state.vacationMode) {
 
@@ -164,7 +170,7 @@ const LineGraph = props => {
       </div>
       <br />
       <div className='d-flex align-items-center m-2 justify-content-center' >
-          
+
         {props.state.vacationMode &&
           <div className='d-flex align-items-center m-2 justify-content-center w-25'>
             <input
@@ -175,7 +181,7 @@ const LineGraph = props => {
               placeholder="Type to search currency..."
               onChange={e => {
                 e.persist();
-                props.changeCurrency(e.target.value)
+                changeCurrency(e.target.value)
                 setState(prev => {
                   return { ...prev, currency: e.target.value, exchangeRate: props.state.exchangeRates.rates[e.target.value] }
                 })
@@ -198,7 +204,7 @@ const LineGraph = props => {
         </select>
         <button
           className='btn btn-primary m-2 gradient-custom-4 submit text-dark'
-          onClick={() => props.transition('EXPENSES')}>
+          onClick={() => transition('EXPENSES')}>
           Expenses
         </button>
       </div>
