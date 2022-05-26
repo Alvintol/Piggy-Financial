@@ -13,10 +13,18 @@ import {
 	toggleClassNameExpenseInput,
 	toggleRemoveIncomeButton,
 	toggleClassNameBlur,
-	toggleRemoveMapview
+	toggleRemoveMapView
 } from '../../helpers/helper_classnames';
 
 const Expenses = props => {
+
+	// Destructured props
+	const {
+		addExpense,
+		removeExpense,
+		changeCurrency
+	} = props;
+
 	const [state, setState] = useState({
 		date: '',
 		amount: 0,
@@ -25,23 +33,23 @@ const Expenses = props => {
 		goal_amount: 3000000,
 		category_name: 'category',
 		goal_name: 'Vacation: Iceland',
-		currency: props.currentCurrency || 'USD',
-		exchangeRate: props.exchangeRates.rates[props.currentCurrency]
+		currency: props.state.currentCurrency || 'USD',
+		exchangeRate: props.state.exchangeRates.rates[props.state.currentCurrency]
 	});
 
 	// Adds or removes a class based on state.input
 	const removeIncomeButton = toggleRemoveIncomeButton(state)
 	const expenseInput = toggleClassNameExpenseInput(state);
-	const removeMapview = toggleRemoveMapview(state)
+	const removeMapView = toggleRemoveMapView(state)
 	const blur = toggleClassNameBlur(state);
 	const EXPENSES = 'EXPENSES';
 	const LINE = 'LINE';
 
-	const { mode, transition, back } = useVisualMode(LINE);
+	const { mode, transition } = useVisualMode(LINE);
 
 	//gets list of all currencies in api list
-	const currencies = getCurrenciesOptions(props.currencySymbols)
-	const expenseID = getFirstExpenseByID(props.expenses)
+	const currencies = getCurrenciesOptions(props.state.currencySymbols)
+	const expenseID = getFirstExpenseByID(props.state.expenses)
 
 	// Send input data to backend 
 	const submit = input => {
@@ -66,7 +74,7 @@ const Expenses = props => {
 				input: 'disappear'
 			}
 		})
-		props.addExpense(expense);
+		addExpense(expense);
 	};
 
 	return (
@@ -74,33 +82,17 @@ const Expenses = props => {
 			{mode === LINE && (
 				<LineGraph
 					key='savingGraph'
-					back={back}
-					user={props.userId}
-					goals={props.goals}
-					expenses={props.expenses}
-					dataPoints={props.dataPoints}
+					state={props.state}
 					transition={transition}
-					vacationMode={props.vacationMode}
-					vacationData={props.vacationData}
-					changeCurrency={props.changeCurrency}
-					currencySymbols={props.currencySymbols}
-					exchangeRates={props.state.exchangeRates}
-					currentCurrency={props.state.currentCurrency}
+					changeCurrency={changeCurrency}
 				/>
 			)}
 			{mode === EXPENSES && (
 				<div id="user-expense-input">
 					<ExpenseTable
 						key='expenseTable'
-						goals={props.goals}
-						userId={props.userId}
-						expenses={props.expenses}
-						vacationMode={props.vacationMode}
-						removeExpense={props.removeExpense}
-						changeCurrency={props.changeCurrency}
-						currencySymbols={props.currencySymbols}
-						exchangeRates={props.state.exchangeRates}
-						currentCurrency={props.state.currentCurrency}
+						state={props.state}
+						removeExpense={removeExpense}
 					/>
 					<div id='input-card' className={expenseInput}>
 						<form className={"d-flex justify-content-around row row-cols-lg-auto g-3 align-items-center p-3"}>
@@ -116,15 +108,15 @@ const Expenses = props => {
 										className="form-control form-control-sm w-100"
 										list="datalistOptions"
 										id="exchange-search"
-										value={props.currentCurrency}
+										value={props.state.currentCurrency}
 										onChange={e => {
 											e.persist();
-											props.changeCurrency(e.target.value)
+											changeCurrency(e.target.value)
 											setState(prev => {
 												return {
 													...prev,
 													currency: e.target.value,
-													exchangeRate: props.exchangeRates.rates[e.target.value]
+													exchangeRate: props.state.exchangeRates.rates[e.target.value]
 												}
 											})
 										}}
@@ -147,7 +139,7 @@ const Expenses = props => {
 										setState(prev => {
 											return {
 												...prev,
-												amount: (event.target.value / props.exchangeRates.rates[props.currentCurrency]) * 100
+												amount: (event.target.value / props.state.exchangeRates.rates[props.state.currentCurrency]) * 100
 											}
 										})
 									}
@@ -214,8 +206,8 @@ const Expenses = props => {
 										e.preventDefault();
 										submit({
 											expense_id: expenseID.id + 1 ||
-												props.expenses.length + 1,
-											user_id: props.userId,
+												props.state.expenses.length + 1,
+											user_id: props.state.user,
 											date: state.date,
 											amount: state.amount,
 											category_id: state.category_id,
@@ -260,7 +252,7 @@ const Expenses = props => {
 								<div className='w-50 d-flex justify-content-center'>
 									<button
 										name='graph-thumbnail'
-										className={removeMapview}>
+										className={removeMapView}>
 										<img
 											onClick={() =>
 												transition(LINE)}

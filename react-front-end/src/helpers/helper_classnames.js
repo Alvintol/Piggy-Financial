@@ -17,7 +17,7 @@ export const toggleRemoveIncomeButton = state =>
     'card vw-50  align-items-center': state.input !== 'appear'
   });
 
-export const toggleRemoveMapview = state =>
+export const toggleRemoveMapView = state =>
   classNames('text-center w-50', {
     'disappear': state.input !== 'disappear',
     'btn card': state.input === 'disappear'
