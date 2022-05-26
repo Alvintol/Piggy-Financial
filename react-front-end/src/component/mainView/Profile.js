@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../../sass/profile.scss';
 import useVisualMode from '../../hooks/useVisualMode';
 import {
   getTotalAmount,
@@ -8,6 +7,7 @@ import {
   getUserByID,
   getAvatarByID
 } from '../../helpers/helper_functions';
+import '../../sass/profile.scss';
 import NewGoal from './NewGoal';
 
 const Profile = props => {
@@ -19,9 +19,9 @@ const Profile = props => {
   const { mode, transition, back } = useVisualMode(GOAL);
 
   const username = getUserByID(props.state.users, props.state.user).username;
-  const savingsbyID = getSavingsByID(props.state.savings, props.state.user);
+  const savingsByID = getSavingsByID(props.state.savings, props.state.user);
   const goalByID = getGoalByID(props.state.goals, props.state.user);
-  const totalSaved = getTotalAmount(savingsbyID);
+  const totalSaved = getTotalAmount(savingsByID);
   const photo = getAvatarByID(props.state.user);
 
   const [state, setState] = useState({

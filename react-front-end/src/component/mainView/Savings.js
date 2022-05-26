@@ -15,11 +15,11 @@ import {
 const Savings = props => {
 
 	// Retrieves total amount of saved money
-	const savingsbyID = getSavingsByID(props.savings, props.userId);
-	const totalSaved = getTotalAmount(savingsbyID);
+	const savingsByID = getSavingsByID(props.state.savings, props.state.user);
+	const totalSaved = getTotalAmount(savingsByID);
 
 	// Retrieves days until end date for goal & total amount saving for
-	const goalByID = getGoalByID(props.goals, props.userId);
+	const goalByID = getGoalByID(props.state.goals, props.state.user);
 	const totalDaysTillGoal = getDaysTillGoal(goalByID);
 	const totalGoal = getTotalAmount(goalByID);
 

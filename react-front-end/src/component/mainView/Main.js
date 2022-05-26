@@ -13,7 +13,9 @@ const Main = props => {
   //destructured props
   const {
     state,
-    changeTab, 
+    changeTab,
+    removeGoal,
+    updateGoals, 
 
   } = props;
 
@@ -21,7 +23,7 @@ const Main = props => {
   const SAVINGS = 'SAVINGS';
   const EXPENSES = 'EXPENSES';
   const VACATION = 'VACATION';
-  const { transition } = useVisualMode(props.state.tab);
+  const { transition } = useVisualMode(state.tab);
   
   return (
     <div>
@@ -30,37 +32,24 @@ const Main = props => {
         users={state.users}
         userId={state.user}
       />
-      {props.state.tab === PROFILE && <Profile
+      {state.tab === PROFILE && <Profile
         key='profile'
         state={state}
-        removeGoal={props.removeGoal}
-        updateGoals={props.updateGoals}
+        removeGoal={removeGoal}
+        updateGoals={updateGoals}
       />}
-      {props.state.tab === SAVINGS && <Savings
+      {state.tab === SAVINGS && <Savings
         key='savings'
-        goals={props.goals}
-        userId={props.userId}
-        incomes={props.incomes}
-        savings={props.savings}
-        updateGoals={props.updateGoals}
+        state={state}
+        updateGoals={updateGoals}
       />}
-      {props.state.tab === EXPENSES && <Expenses
+      {state.tab === EXPENSES && <Expenses
         key='expenses'
-        state={props.state}
-        goals={props.goals}
-        userId={props.userId}
-        expenses={props.expenses}
-        dataPoints={props.dataPoints}
+        state={state}
         addExpense={props.addExpense}
-        vacationMode={props.vacationMode}
         removeExpense={props.removeExpense}
-        changeCurrency={props.changeCurrency}
-        vacationData={props.alvinVacationSpent}
-        exchangeRates={props.state.exchangeRates}
-        currencySymbols={props.state.currencySymbols}
-        currentCurrency={props.state.currentCurrency}
       />}
-      {props.state.tab === VACATION && <Vacation
+      {state.tab === VACATION && <Vacation
         key='vacation'
         goals={props.goals}
         userId={props.userId}

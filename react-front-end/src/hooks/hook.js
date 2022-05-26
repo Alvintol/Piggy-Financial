@@ -3,7 +3,7 @@ import { getNewList, getUserByEmail } from '../helpers/helper_functions';
 // import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
-export default function useApplicationData() {
+const useApplicationData = () => {
   const [state, setState] = useState({
     tab: 'PROFILE',
     username: '',
@@ -228,7 +228,7 @@ export default function useApplicationData() {
     const apiExpenses = 'http://localhost:8081/api/expenses';
     const apiDataPoints = 'http://localhost:8081/api/dataPoints';
     const apiCurrencySymbols = 'https://api.currencyfreaks.com/currency-symbols';
-    const apiExchangeRates = 'https://api.currencyfreaks.com/latest?apikey=5b3f999f6f8f46eb9ed500c44b821491';
+    const apiExchangeRates = `https://api.currencyfreaks.com/latest?apikey=${process.env.REACT_APP_APIKEY}`;
 
     Promise.all([
       axios.get(apiGoals),
@@ -269,4 +269,6 @@ export default function useApplicationData() {
     changeCurrency,
     // removeCookie
   };
-}
+};
+
+export default useApplicationData;
