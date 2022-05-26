@@ -8,11 +8,20 @@ import {
 	getSavingsByID,
 } from '../../helpers/helper_functions';
 import {
-	toggleClassNameBlur, toggleDisappearText, togglePiggyAppear, togglePiggyBreak, toggleVacationMode,
+	toggleClassNameBlur,
+	toggleDisappearText,
+	togglePiggyAppear,
+	togglePiggyBreak,
+	toggleVacationMode
 } from '../../helpers/helper_classnames';
 
 
 const Savings = props => {
+
+	// Destructured props
+	const {
+		updateGoals
+	} = props;
 
 	// Retrieves total amount of saved money
 	const savingsByID = getSavingsByID(props.state.savings, props.state.user);
@@ -40,7 +49,7 @@ const Savings = props => {
 
 	// Edits user goal in database
 	const onChange = newGoal => {
-		props.updateGoals(goalByID.id, newGoal);
+		updateGoals(goalByID.id, newGoal);
 		setState(prev => {
 			return { ...prev, vacation: '' }
 		})

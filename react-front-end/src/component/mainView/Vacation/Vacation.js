@@ -9,20 +9,25 @@ import {
 } from '../../../helpers/helper_functions'
 
 const Vacation = props => {
-  const vacationInfo = getGoalByID(props.goals, props.userId)
+  
+  // Destructured props
+  const {
+    state
+  } = props;
+
+  const vacationInfo = getGoalByID(state.goals, state.user)
   const homeTime = getDaysTillGoal(vacationInfo)
   const vacationExpenses = filteredVacationExpenses(
-    props.expenses,
-    props.userId,
+    state.expenses,
+    state.user,
     vacationInfo.start_date
   )
 
-  const totalSpentOnVacation = (getTotalAmount(vacationExpenses) * props.exchangeRates.rates[props.currentCurrency]).toFixed(2)
+  const totalSpentOnVacation = (getTotalAmount(vacationExpenses) * state.exchangeRates.rates[state.currentCurrency]).toFixed(2)
 
+  const dayAllowance = (((vacationInfo.amount * state.exchangeRates.rates[state.currentCurrency]) - totalSpentOnVacation) / 100 / homeTime).toFixed(2);
 
-  const dayAllowance = (((vacationInfo.amount * props.exchangeRates.rates[props.currentCurrency]) - totalSpentOnVacation) / 100 / homeTime).toFixed(2);
-
-  const weekAllowance = ((((vacationInfo.amount * props.exchangeRates.rates[props.currentCurrency]) - totalSpentOnVacation) * 7) / 100 / homeTime).toFixed(2);
+  const weekAllowance = ((((vacationInfo.amount * state.exchangeRates.rates[state.currentCurrency]) - totalSpentOnVacation) * 7) / 100 / homeTime).toFixed(2);
 
   return (
     <div>
@@ -42,13 +47,13 @@ const Vacation = props => {
                     {(
                       totalSpentOnVacation / 100
                     ).toFixed(2)}{' '}
-                    {props.currentCurrency}/{' '}
+                    {state.currentCurrency}/{' '}
                     {(
                       (vacationInfo.amount *
-                        props.exchangeRates.rates[props.currentCurrency]) /
+                        state.exchangeRates.rates[state.currentCurrency]) /
                       100
                     ).toFixed(2)}{' '}
-                    {props.currentCurrency}
+                    {state.currentCurrency}
                   </h1>
                 </td>
               </tr>
@@ -67,8 +72,8 @@ const Vacation = props => {
           <ProgressCircle
             key="vacationCircle"
             total_saved={(totalSpentOnVacation / 100).toFixed(2)}
-            goalTotal_cents={((vacationInfo.amount * props.exchangeRates.rates[props.currentCurrency]) / 100).toFixed(2)}
-            vacationMode={props.vacationMode}
+            goalTotal_cents={((vacationInfo.amount * state.exchangeRates.rates[state.currentCurrency]) / 100).toFixed(2)}
+            vacationMode={state.vacationMode}
           />
         </div>
       </div>

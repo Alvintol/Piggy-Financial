@@ -51,21 +51,12 @@ const App = () => {
         key='main'
         back={back}
         state={state}
-        userId={state.user}
-        users={state.users}
-        goals={state.goals}
         changeTab={changeTab}
         removeGoal={removeGoal}
         addExpense={addExpense}
-        incomes={state.incomes}
-        savings={state.savings}
-        expenses={state.expenses}
         updateGoals={updateGoals}
-        dataPoints={state.dataPoints}
         removeExpense={removeExpense}
         changeCurrency={changeCurrency}
-        vacationMode={state.vacationMode}
-        alvinVacationSpent={state.alvinVacationSpent}
       />}
     </div>
   );

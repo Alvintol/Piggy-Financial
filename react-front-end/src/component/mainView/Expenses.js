@@ -13,7 +13,7 @@ import {
 	toggleClassNameExpenseInput,
 	toggleRemoveIncomeButton,
 	toggleClassNameBlur,
-	toggleRemoveMapview
+	toggleRemoveMapView
 } from '../../helpers/helper_classnames';
 
 const Expenses = props => {
@@ -40,12 +40,12 @@ const Expenses = props => {
 	// Adds or removes a class based on state.input
 	const removeIncomeButton = toggleRemoveIncomeButton(state)
 	const expenseInput = toggleClassNameExpenseInput(state);
-	const removeMapview = toggleRemoveMapview(state)
+	const removeMapView = toggleRemoveMapView(state)
 	const blur = toggleClassNameBlur(state);
 	const EXPENSES = 'EXPENSES';
 	const LINE = 'LINE';
 
-	const { mode, transition, back } = useVisualMode(LINE);
+	const { mode, transition } = useVisualMode(LINE);
 
 	//gets list of all currencies in api list
 	const currencies = getCurrenciesOptions(props.state.currencySymbols)
@@ -111,7 +111,7 @@ const Expenses = props => {
 										value={props.state.currentCurrency}
 										onChange={e => {
 											e.persist();
-											props.state.changeCurrency(e.target.value)
+											changeCurrency(e.target.value)
 											setState(prev => {
 												return {
 													...prev,
@@ -252,7 +252,7 @@ const Expenses = props => {
 								<div className='w-50 d-flex justify-content-center'>
 									<button
 										name='graph-thumbnail'
-										className={removeMapview}>
+										className={removeMapView}>
 										<img
 											onClick={() =>
 												transition(LINE)}

@@ -59,10 +59,12 @@ KEVIN:
 
 ALVIN:
 
-- ```In my page you can see I was initially saving for a car```
+- ```In my account I was initially saving for a car```
 - ```But, lets say I change my mind post boot camp, and I now need a vacation instead```
 - ```We look at our savings and see we only need about $700.```
-- ```We just won a bet against Kevin recdently and lets throw that money into our savings to hit our goal!```
+- ```We just won a bet against Kevin recently and lets throw that money into our savings to hit our goal!```
+- ```As you can see, I've very bad at keeping steady with my goals```
+- ```The green guide line helped me visualize that I've veered off course and helped me kind of correct it few times in this process```
 - ```Now lets go break that piggy!```
 - ```We can now see that vacation mode is accessible since we were are saving for a vacation```\
 (break the pig)\

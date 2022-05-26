@@ -2,8 +2,14 @@ import React from 'react';
 import '../../sass/botNav.scss';
 
 const BotNav = props => {
-  const changeTab = (tab) => {
-    props.changeTab(tab)
+
+  const {
+    changeTab,
+    vacationMode
+  } = props;
+
+  const changesTab = (tab) => {
+    changeTab(tab)
   }
 
   return (
@@ -14,29 +20,29 @@ const BotNav = props => {
             <li
               className="h-100 w-100 nav-item nav-button"
               onClick={() =>
-                changeTab('PROFILE')}>
+                changesTab('PROFILE')}>
               <h2 className="nav-link" >Profile</h2>
             </li>
-            {!props.vacationMode &&
+            {!vacationMode &&
               <li
                 className="h-100 w-100 nav-item nav-button"
                 onClick={() =>
-                  changeTab('SAVINGS')}>
+                  changesTab('SAVINGS')}>
                 <h2 className="nav-link" >Savings</h2>
               </li>
             }
-            {props.vacationMode &&
+            {vacationMode &&
               <li
                 className="h-100 w-100 nav-item nav-button"
                 onClick={() =>
-                  changeTab('VACATION')}>
+                  changesTab('VACATION')}>
                 <h2 className="nav-link" >Budget</h2>
               </li>
             }
             <li
               className="h-100 w-100 nav-item nav-button"
               onClick={() =>
-                changeTab('EXPENSES')}>
+                changesTab('EXPENSES')}>
               <h2 className="nav-link" >Expenses</h2>
             </li>
           </ul>

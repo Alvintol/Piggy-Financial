@@ -7,9 +7,15 @@ import {
 
 const TopNav = props => {
 
+  // Destructured props
+  const {
+    users,
+    userId
+  } = props;
+
   // Retrieves user information to display
-  const username = getUserByID(props.users, props.userId).username;
-  const photo = getAvatarByID(props.userId);
+  const username = getUserByID(users, userId).username;
+  const photo = getAvatarByID(userId);
 
   return (
     <nav className="nav-top navbar navbar-expand-lg navbar-light bg-light top-nav-items">

@@ -18,7 +18,7 @@ const Main = props => {
     updateGoals, 
     removeGoal,
     removeExpense,
-
+    changeCurrency
   } = props;
 
   const PROFILE = 'PROFILE';
@@ -49,17 +49,12 @@ const Main = props => {
         key='expenses'
         state={state}
         addExpense={addExpense}
+        changeCurrency={changeCurrency}
         removeExpense={removeExpense}
       />}
       {state.tab === VACATION && <Vacation
         key='vacation'
-        goals={props.goals}
-        userId={props.userId}
-        savings={props.savings}
-        expenses={props.expenses}
-        vacationMode={props.vacationMode}
-        exchangeRates={props.state.exchangeRates}
-        currentCurrency={props.state.currentCurrency}
+        state={state}
       />}
       <BotNav
         key='botnav'

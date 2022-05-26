@@ -11,6 +11,14 @@ import '../../sass/profile.scss';
 import NewGoal from './NewGoal';
 
 const Profile = props => {
+
+  // Destructured props
+  const {
+    removeGoal,
+    updateGoals
+  } = props;
+
+  // Views
   const EDIT = 'EDIT';
   const GOAL = 'GOAL';
   const EMPTY = 'EMPTY';
@@ -34,13 +42,13 @@ const Profile = props => {
 
   // Edits state.user goal in database
   const onChange = newGoal => {
-    props.updateGoals(goalByID.id, newGoal);
+    updateGoals(goalByID.id, newGoal);
     transition(GOAL);
   };
 
   // Deletes state.user goal from database
-  const removeGoal = (id) => {
-    props.removeGoal(id)
+  const removesGoal = (id) => {
+    removeGoal(id)
     transition(EMPTY)
   };
 
@@ -95,9 +103,12 @@ const Profile = props => {
                           id="goalName"
                           className="form-control align-items-center fw-bolder text-center"
                           value={state.goal_name}
-                          onChange={(event) => setState(prev => {
-                            return { ...prev, goal_name: event.target.value }
-                          })}
+                          onChange={(event) => {
+                            event.persist();
+                            setState(prev => {
+                              return { ...prev, goal_name: event.target.value }
+                            })
+                          }}
                         />
                       </div>
                     </td>
@@ -116,13 +127,15 @@ const Profile = props => {
                           id="goalAmount"
                           className="form-control align-items-center"
                           value={state.totalGoals}
-                          onChange={event =>
+                          onChange={event => {
+                            event.persist();
                             setState(prev => {
                               return {
                                 ...prev,
                                 totalGoals: event.target.value,
                               }
                             })
+                          }
                           }
                         />
                       </div>
@@ -136,10 +149,13 @@ const Profile = props => {
                           id="date"
                           className="form-control"
                           type="date"
-                          value={state.date}
-                          onChange={(event) => setState(prev => {
-                            return { ...prev, date: event.target.value }
-                          })}
+                          value={state.end_date}
+                          onChange={(event) => {
+                            event.persist();
+                            setState(prev => {
+                              return { ...prev, end_date: event.target.value }
+                            })
+                          }}
                         />
                         <span id="dateSelected"></span>
                       </div>
@@ -177,9 +193,12 @@ const Profile = props => {
                           id="goalName"
                           className="form-control align-items-center fw-bolder text-center"
                           value={state.goal_name}
-                          onChange={(event) => setState(prev => {
-                            return { ...prev, goal_name: event.target.value }
-                          })}
+                          onChange={event => {
+                            event.persist();
+                            setState(prev => {
+                              return { ...prev, goal_name: event.target.value }
+                            })
+                          }}
                         />
                       </div>
                     </td>
@@ -198,13 +217,15 @@ const Profile = props => {
                           id="goalAmount"
                           className="form-control align-items-center"
                           value={state.totalGoals}
-                          onChange={event =>
+                          onChange={event => {
+                            event.persist();
                             setState(prev => {
                               return {
                                 ...prev,
                                 totalGoals: event.target.value,
                               }
                             })
+                          }
                           }
                         />
                       </div>
@@ -219,9 +240,12 @@ const Profile = props => {
                           className="form-control"
                           type="date"
                           value={state.date}
-                          onChange={(event) => setState(prev => {
-                            return { ...prev, end_date: event.target.value }
-                          })}
+                          onChange={event => {
+                            event.persist();
+                            setState(prev => {
+                              return { ...prev, end_date: event.target.value }
+                            })
+                          }}
                         />
                         <span id="dateSelected"></span>
                       </div>
@@ -317,7 +341,7 @@ const Profile = props => {
                 <button
                   className='m-1 btn btn-danger'
                   onClick={() =>
-                    removeGoal(goalByID.id)
+                    removesGoal(goalByID.id)
                   }
                 >
                   Confirm
