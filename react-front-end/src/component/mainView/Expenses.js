@@ -21,7 +21,8 @@ const Expenses = props => {
 	// Destructured props
 	const {
 		addExpense,
-		removeExpense
+		removeExpense,
+		changeCurrency
 	} = props;
 
 	const [state, setState] = useState({
@@ -82,23 +83,16 @@ const Expenses = props => {
 				<LineGraph
 					key='savingGraph'
 					back={back}
-					user={props.state.user}
-					goals={props.state.goals}
-					expenses={props.state.expenses}
-					dataPoints={props.state.dataPoints}
+					state={props.state}
 					transition={transition}
-					vacationMode={props.state.vacationMode}
-					vacationData={props.vacationData}
-					changeCurrency={props.state.changeCurrency}
-					currencySymbols={props.state.currencySymbols}
-					exchangeRates={props.state.exchangeRates}
-					currentCurrency={props.state.currentCurrency}
+					changeCurrency={changeCurrency}
 				/>
 			)}
 			{mode === EXPENSES && (
 				<div id="user-expense-input">
 					<ExpenseTable
 						key='expenseTable'
+						state={props.state}
 						goals={props.state.goals}
 						userId={props.state.user}
 						expenses={props.state.expenses}

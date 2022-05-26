@@ -35,9 +35,9 @@ Chart.register(
 const LineGraph = props => {
 
   //  Retrieves line graph data
-  const goal = getGoalByID(props.goals, props.user)
-  const dataPoints = getDataByID(props.dataPoints, props.user)
-  const currencies = getCurrenciesOptions(props.currencySymbols); 
+  const goal = getGoalByID(props.state.goals, props.state.user)
+  const dataPoints = getDataByID(props.state.dataPoints, props.state.user)
+  const currencies = getCurrenciesOptions(props.state.currencySymbols); 
 
   let graphData = {
     total: '',
@@ -50,7 +50,7 @@ const LineGraph = props => {
   };
   
   // Loads Savings Data
-  if (!props.vacationMode) {
+  if (!props.state.vacationMode) {
 
     graphData = {
       ...graphData,
@@ -74,7 +74,7 @@ const LineGraph = props => {
     });
 
     // Loads Spending Data
-  } else if (props.vacationMode) {
+  } else if (props.state.vacationMode) {
 
     graphData = {
       ...graphData,
@@ -104,8 +104,8 @@ const LineGraph = props => {
   const [state, setState] = useState({
     dateUnit: graphData.trackUnits,
     dataPoints: graphData.updatePoints,
-    currency: props.currentCurrency || 'USD',
-    exchangeRate: props.exchangeRates.rates[props.currentCurrency]
+    currency: props.state.currentCurrency || 'USD',
+    exchangeRate: props.state.exchangeRates.rates[props.state.currentCurrency]
   })
 
   const data = {
@@ -165,19 +165,19 @@ const LineGraph = props => {
       <br />
       <div className='d-flex align-items-center m-2 justify-content-center' >
           
-        {props.vacationMode &&
+        {props.state.vacationMode &&
           <div className='d-flex align-items-center m-2 justify-content-center w-25'>
             <input
               className="form-control w-100"
               list="datalistOptions"
               id="exchange-search"
-              value={props.currentCurrency}
+              value={props.state.currentCurrency}
               placeholder="Type to search currency..."
               onChange={e => {
                 e.persist();
                 props.changeCurrency(e.target.value)
                 setState(prev => {
-                  return { ...prev, currency: e.target.value, exchangeRate: props.exchangeRates.rates[e.target.value] }
+                  return { ...prev, currency: e.target.value, exchangeRate: props.state.exchangeRates.rates[e.target.value] }
                 })
               }}
             />

@@ -14,8 +14,10 @@ const Main = props => {
   const {
     state,
     changeTab,
-    removeGoal,
+    addExpense,
     updateGoals, 
+    removeGoal,
+    removeExpense,
 
   } = props;
 
@@ -46,8 +48,8 @@ const Main = props => {
       {state.tab === EXPENSES && <Expenses
         key='expenses'
         state={state}
-        addExpense={props.addExpense}
-        removeExpense={props.removeExpense}
+        addExpense={addExpense}
+        removeExpense={removeExpense}
       />}
       {state.tab === VACATION && <Vacation
         key='vacation'
